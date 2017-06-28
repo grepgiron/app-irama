@@ -12,7 +12,7 @@ public final class feedSqlite {
 
     public static class feedClient implements BaseColumns{
 
-        private static final String TABLE_NAME = "client";
+        private static final String TABLE_NAME = "clients";
         private static final String COLUMN_CLIENT_CODE = "code";
         private static final String COLUMN_CLIENT_NAME = "name";
         private static final String COLUMN_CLIENT_RTN = "rtn";
@@ -57,7 +57,7 @@ public final class feedSqlite {
 
     public static final class feedOrder implements BaseColumns{
 
-        private static final String TABLE_NAME = "product_category";
+        private static final String TABLE_NAME = "orders";
         private static final String COLUMN_ORDER_ID = "orderId";
         private static final String COLUMN_ORDER_DESCRIPTION = "description";
         private static final String COLUMN_ORDER_URGENT = "isUrgent";
