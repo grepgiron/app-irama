@@ -1,6 +1,11 @@
 package irama.irama;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
@@ -9,17 +14,25 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import irama.irama.Adapters.PageAdapter;
+import irama.irama.Sqlite.DBHelper;
 
 public class home extends AppCompatActivity {
+
+    private SharedPreferences sharedPreferences;
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        sharedPreferences = getSharedPreferences("PrefsFile",0);
+        dbHelper = new DBHelper(home.this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,5 +72,36 @@ public class home extends AppCompatActivity {
             }
         });
 
+        if(sharedPreferences.getBoolean("database_created", true)){
+
+            try {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                launchProgressSql();
+                Log.e("Database", "created");
+
+            }catch (SQLiteException e){
+                Log.d("SQLite", e.toString());
+            }
+
+        }
+
+    }
+
+    public void launchProgressSql(){
+        final ProgressDialog progress = new ProgressDialog(this);
+        progress.setTitle("Database");
+        progress.setMessage("Please wait while the database is created...");
+        progress.show();
+
+        Runnable progressRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                progress.cancel();
+            }
+        };
+
+        Handler pdCanceller = new Handler();
+        pdCanceller.postDelayed(progressRunnable, 3000);
     }
 }

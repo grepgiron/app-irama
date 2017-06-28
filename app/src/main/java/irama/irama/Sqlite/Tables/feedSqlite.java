@@ -36,8 +36,8 @@ public final class feedSqlite {
 
     public static class feedProductCategory implements BaseColumns{
 
-        private static final String TABLE_NAME = "product_category";
-        private static final String COLUMN_CATEGORY_ID = "_id";
+        private static final String TABLE_NAME = "categoryproduct";
+        private static final String COLUMN_CATEGORY_ID = "categoryId";
         private static final String COLUMN_CATEGORY_NAME = "name";
         private static final String COLUMN_CATEGORY_DESCRIPTION = "description";
 
@@ -58,7 +58,7 @@ public final class feedSqlite {
     public static final class feedOrder implements BaseColumns{
 
         private static final String TABLE_NAME = "product_category";
-        private static final String COLUMN_ORDER_ID = "_id";
+        private static final String COLUMN_ORDER_ID = "orderId";
         private static final String COLUMN_ORDER_DESCRIPTION = "description";
         private static final String COLUMN_ORDER_URGENT = "isUrgent";
         private static final String COLUMN_ORDER_REQUEST_ON = "requestOn";
