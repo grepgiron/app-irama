@@ -8,16 +8,26 @@ public class product_category {
 
     private int id;
     private String name;
+    private String _id;
     private String description;
 
-    public product_category(int id, String name, String description) {
+    public product_category(int id, String name, String _id, String description) {
         this.id = id;
         this.name = name;
+        this._id = _id;
         this.description = description;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public void setId(int id) {
