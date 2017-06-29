@@ -82,7 +82,7 @@ public class home extends AppCompatActivity {
             }catch (SQLiteException e){
                 Log.d("SQLite", e.toString());
             }
-
+            sharedPreferences.edit().putBoolean("database_create", false).commit();
         }
 
     }

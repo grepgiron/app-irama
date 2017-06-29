@@ -8,7 +8,7 @@ public class order {
 
     private String id;
     private String description;
-    private boolean isUrgent;
+    private int isUrgent;
     private String requestOn;
     private String code;
     private String clientId;
@@ -17,10 +17,16 @@ public class order {
     private String serieId;
     private String orderTypetId;
 
-    public order() {
+    public order(int columnIndex, int index) {
     }
 
-    public order(String description, boolean isUrgent, String requestOn, String code, String clientId, String productId, String employeeId, String serieId, String orderTypetId) {
+
+    public order(String description, int isUrgent) {
+        this.description = description;
+        this.isUrgent = isUrgent;
+    }
+
+    public order(String description, int isUrgent, String requestOn, String code, String clientId, String productId, String employeeId, String serieId, String orderTypetId) {
         this.description = description;
         this.isUrgent = isUrgent;
         this.requestOn = requestOn;
@@ -32,7 +38,7 @@ public class order {
         this.orderTypetId = orderTypetId;
     }
 
-    public order(String id, String description, boolean isUrgent, String requestOn, String code, String clientId, String productId, String employeeId, String serieId, String orderTypetId) {
+    public order(String id, String description, int isUrgent, String requestOn, String code, String clientId, String productId, String employeeId, String serieId, String orderTypetId) {
         this.id = id;
         this.description = description;
         this.isUrgent = isUrgent;
@@ -61,11 +67,11 @@ public class order {
         this.description = description;
     }
 
-    public boolean isUrgent() {
+    public int isUrgent() {
         return isUrgent;
     }
 
-    public void setUrgent(boolean urgent) {
+    public void setUrgent(int urgent) {
         isUrgent = urgent;
     }
 

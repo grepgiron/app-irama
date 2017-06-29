@@ -57,17 +57,17 @@ public final class feedSqlite {
 
     public static final class feedOrder implements BaseColumns{
 
-        private static final String TABLE_NAME = "orders";
-        private static final String COLUMN_ORDER_ID = "orderId";
-        private static final String COLUMN_ORDER_DESCRIPTION = "description";
-        private static final String COLUMN_ORDER_URGENT = "isUrgent";
-        private static final String COLUMN_ORDER_REQUEST_ON = "requestOn";
-        private static final String COLUMN_ORDER_CODE = "code";
-        private static final String COLUMN_ORDER_CLIENT_ID = "clientId";
-        private static final String COLUMN_ORDER_PRODUCT_ID = "productId";
-        private static final String COLUMN_ORDER_EMPLOYEE_ID = "employeeId";
-        private static final String COLUMN_ORDER_SERIE_ID = "serieId";
-        private static final String COLUMN_ORDER_ORDER_TYPE = "orderTypetId";
+        public static final String TABLE_NAME = "orders";
+        public static final String COLUMN_ORDER_ID = "orderId";
+        public static final String COLUMN_ORDER_DESCRIPTION = "description";
+        public static final String COLUMN_ORDER_URGENT = "isUrgent";
+        public static final String COLUMN_ORDER_REQUEST_ON = "requestOn";
+        public static final String COLUMN_ORDER_CODE = "code";
+        public static final String COLUMN_ORDER_CLIENT_ID = "clientId";
+        public static final String COLUMN_ORDER_PRODUCT_ID = "productId";
+        public static final String COLUMN_ORDER_EMPLOYEE_ID = "employeeId";
+        public static final String COLUMN_ORDER_SERIE_ID = "serieId";
+        public static final String COLUMN_ORDER_ORDER_TYPE = "orderTypetId";
 
         private static final String TEXT_TYPE = " TEXT";
         private static final String BOOLEAN_TYPE = " BOOLEAN";
@@ -89,6 +89,9 @@ public final class feedSqlite {
 
         public static final String SQL_DROP_ORDER =
                 "DROP IF EXISTS " + TABLE_NAME;
+
+        public static final String QUERY_ALL_ORDER =
+                "SELECT * FROM " + TABLE_NAME;
 
     }
 

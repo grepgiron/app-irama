@@ -18,7 +18,7 @@
             android:theme="@style/MyCheckBox"/>
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/client_item_list"
             android:layout_width="60dp"
             android:text="Client"
             android:layout_height="wrap_content"
