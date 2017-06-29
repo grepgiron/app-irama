@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         app:layout_anchorGravity="bottom|right|end"
         android:src="@drawable/ic_assignment"
+        android:layout_margin="16dp"
         />
 
 </android.support.design.widget.CoordinatorLayout>

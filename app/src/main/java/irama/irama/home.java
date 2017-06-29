@@ -31,8 +31,7 @@ public class home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        sharedPreferences = getSharedPreferences("PrefsFile",0);
-        dbHelper = new DBHelper(home.this);
+        initComponents();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,33 +74,35 @@ public class home extends AppCompatActivity {
         if(sharedPreferences.getBoolean("database_created", true)){
 
             try {
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                launchProgressSql();
+                dbHelper.getWritableDatabase();
                 Log.e("Database", "created");
+                final ProgressDialog progress = new ProgressDialog(this);
+                progress.setTitle("Database");
+                progress.setMessage("Please wait while the database is created...");
+                progress.show();
+
+                Runnable progressRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.cancel();
+                    }
+                };
+
+                Handler pdCanceller = new Handler();
+                pdCanceller.postDelayed(progressRunnable, 3000);
+
 
             }catch (SQLiteException e){
                 Log.d("SQLite", e.toString());
             }
-            sharedPreferences.edit().putBoolean("database_create", false).commit();
+            sharedPreferences.edit().putBoolean("database_created", false).commit();
         }
 
     }
 
-    public void launchProgressSql(){
-        final ProgressDialog progress = new ProgressDialog(this);
-        progress.setTitle("Database");
-        progress.setMessage("Please wait while the database is created...");
-        progress.show();
-
-        Runnable progressRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                progress.cancel();
-            }
-        };
-
-        Handler pdCanceller = new Handler();
-        pdCanceller.postDelayed(progressRunnable, 3000);
+    public void initComponents(){
+        dbHelper = new DBHelper(home.this);
+        sharedPreferences = getSharedPreferences("FirstTime",0);
     }
+
 }
