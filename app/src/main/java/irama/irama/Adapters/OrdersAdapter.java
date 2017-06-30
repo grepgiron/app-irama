@@ -38,6 +38,7 @@ public class OrdersAdapter extends ArrayAdapter<order> {
 
         tvClient.setText(order.getDescription());
         checkBox.setChecked(true);
+        checkBox.setEnabled(false);
 
         return convertView;
     }

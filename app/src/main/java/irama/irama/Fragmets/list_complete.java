@@ -49,9 +49,9 @@ public class list_complete extends Fragment {
                     if(c != null){
                         if(c.moveToFirst()) {
                             do {
-                                order = new order(c.getString(2).toString(),
+                                order = new order(c.getString(0).toString(),
                                         1);
-                                Log.e(getClass().getSimpleName(), "Insert " + c.getString(2));
+                                Log.e(getClass().getSimpleName(), "Insert " + c.getString(0));
                                 arrayOfOrders.add(order);
                             }while (c.moveToNext());
                         }

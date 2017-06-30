@@ -12,11 +12,11 @@ public final class feedSqlite {
 
     public static class feedClient implements BaseColumns{
 
-        private static final String TABLE_NAME = "clients";
-        private static final String COLUMN_CLIENT_CODE = "code";
-        private static final String COLUMN_CLIENT_NAME = "name";
-        private static final String COLUMN_CLIENT_RTN = "rtn";
-        private static final String COLUMN_CLIENT_ACTIVE = "active";
+        public static final String TABLE_NAME = "clients";
+        public static final String COLUMN_CLIENT_CODE = "code";
+        public static final String COLUMN_CLIENT_NAME = "name";
+        public static final String COLUMN_CLIENT_RTN = "rtn";
+        public static final String COLUMN_CLIENT_ACTIVE = "active";
 
         private static final String TEXT_TYPE = " TEXT";
         private static final String BOOLEAN_TYPE = " BOOLEAN";
@@ -36,10 +36,10 @@ public final class feedSqlite {
 
     public static class feedProductCategory implements BaseColumns{
 
-        private static final String TABLE_NAME = "categoryproduct";
-        private static final String COLUMN_CATEGORY_ID = "categoryId";
-        private static final String COLUMN_CATEGORY_NAME = "name";
-        private static final String COLUMN_CATEGORY_DESCRIPTION = "description";
+        public static final String TABLE_NAME = "categoryproduct";
+        public static final String COLUMN_CATEGORY_ID = "categoryId";
+        public static final String COLUMN_CATEGORY_NAME = "name";
+        public static final String COLUMN_CATEGORY_DESCRIPTION = "description";
 
         private static final String TEXT_TYPE = " TEXT";
         private static final String COMMA_SEP = ",";
@@ -91,7 +91,11 @@ public final class feedSqlite {
                 "DROP IF EXISTS " + TABLE_NAME;
 
         public static final String QUERY_ALL_ORDER =
-                "SELECT * FROM " + TABLE_NAME;
+                "SELECT "+ feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
+                        feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP +feedOrder.COLUMN_ORDER_URGENT +
+                        " FROM " + feedClient.TABLE_NAME +" INNER JOIN " + feedOrder.TABLE_NAME +" ON "+
+                        feedClient.TABLE_NAME +"."+_ID +" = " + feedOrder.TABLE_NAME+"."+_ID+ " AND " +
+                        feedOrder.COLUMN_ORDER_URGENT + " = 'false'";
 
     }
 
