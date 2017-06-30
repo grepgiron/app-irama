@@ -16,10 +16,10 @@ public class order {
     private String employeeId;
     private String serieId;
     private String orderTypetId;
+    public int isSync;
 
-    public order(int columnIndex, int index) {
+    public order() {
     }
-
 
     public order(String description, int isUrgent) {
         this.description = description;
@@ -49,6 +49,14 @@ public class order {
         this.employeeId = employeeId;
         this.serieId = serieId;
         this.orderTypetId = orderTypetId;
+    }
+
+    public int getIsSync() {
+        return isSync;
+    }
+
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
     }
 
     public String getId() {

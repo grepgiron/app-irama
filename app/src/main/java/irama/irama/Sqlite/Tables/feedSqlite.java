@@ -17,6 +17,7 @@ public final class feedSqlite {
         public static final String COLUMN_CLIENT_NAME = "name";
         public static final String COLUMN_CLIENT_RTN = "rtn";
         public static final String COLUMN_CLIENT_ACTIVE = "active";
+        public static final String COLUMN_CLIENT_SYNC = "sync";
 
         private static final String TEXT_TYPE = " TEXT";
         private static final String BOOLEAN_TYPE = " BOOLEAN";
@@ -28,7 +29,8 @@ public final class feedSqlite {
                         COLUMN_CLIENT_NAME + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_RTN + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_CODE + TEXT_TYPE + COMMA_SEP +
-                        COLUMN_CLIENT_ACTIVE + BOOLEAN_TYPE + " )";
+                        COLUMN_CLIENT_ACTIVE + BOOLEAN_TYPE + COMMA_SEP +
+                        COLUMN_CLIENT_SYNC + BOOLEAN_TYPE + " )";
 
         public static final String SQL_DROP_CLIENTS =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -68,6 +70,7 @@ public final class feedSqlite {
         public static final String COLUMN_ORDER_EMPLOYEE_ID = "employeeId";
         public static final String COLUMN_ORDER_SERIE_ID = "serieId";
         public static final String COLUMN_ORDER_ORDER_TYPE = "orderTypetId";
+        public static final String COLUMN_ORDER_SYNC = "sync";
 
         private static final String TEXT_TYPE = " TEXT";
         private static final String BOOLEAN_TYPE = " BOOLEAN";
@@ -85,18 +88,25 @@ public final class feedSqlite {
                         COLUMN_ORDER_EMPLOYEE_ID + TEXT_TYPE + COMMA_SEP +
                         COLUMN_ORDER_SERIE_ID + TEXT_TYPE + COMMA_SEP +
                         COLUMN_ORDER_ORDER_TYPE + TEXT_TYPE + COMMA_SEP +
-                        COLUMN_ORDER_URGENT + BOOLEAN_TYPE + " )";
+                        COLUMN_ORDER_URGENT + BOOLEAN_TYPE + COMMA_SEP +
+                        COLUMN_ORDER_SYNC + BOOLEAN_TYPE + " )";
 
         public static final String SQL_DROP_ORDER =
                 "DROP IF EXISTS " + TABLE_NAME;
 
-        public static final String QUERY_ALL_ORDER =
+        public static final String QUERY_COMPLETE_ORDER =
                 "SELECT "+ feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
                         feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP +feedOrder.COLUMN_ORDER_URGENT +
                         " FROM " + feedClient.TABLE_NAME +" INNER JOIN " + feedOrder.TABLE_NAME +" ON "+
                         feedClient.TABLE_NAME +"."+_ID +" = " + feedOrder.TABLE_NAME+"."+_ID+ " AND " +
                         feedOrder.COLUMN_ORDER_URGENT + " = 'false'";
 
+        public static final String QUERY_PENDING_ORDER =
+                "SELECT "+ feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
+                        feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP +feedOrder.COLUMN_ORDER_URGENT +
+                        " FROM " + feedClient.TABLE_NAME +" INNER JOIN " + feedOrder.TABLE_NAME +" ON "+
+                        feedClient.TABLE_NAME +"."+_ID +" = " + feedOrder.TABLE_NAME+"."+_ID+ " AND " +
+                        feedOrder.COLUMN_ORDER_URGENT + " = 'true'";
     }
 
 }

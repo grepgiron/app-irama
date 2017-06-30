@@ -45,7 +45,7 @@ public class list_complete extends Fragment {
             public void run() {
                 try{
                     db = dbHelper.getWritableDatabase();
-                    Cursor c = db.rawQuery(feedSqlite.feedOrder.QUERY_ALL_ORDER, null);
+                    Cursor c = db.rawQuery(feedSqlite.feedOrder.QUERY_COMPLETE_ORDER, null);
                     if(c != null){
                         if(c.moveToFirst()) {
                             do {

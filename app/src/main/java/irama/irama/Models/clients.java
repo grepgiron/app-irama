@@ -11,6 +11,10 @@ public class clients {
     private String name;
     private String rtn;
     private boolean isActive;
+    public int isSync;
+
+    public clients() {
+    }
 
     public clients(String _id, String code, String name, String rtn, boolean isActive) {
         this._id = _id;
@@ -25,6 +29,14 @@ public class clients {
         this.name = name;
         this.rtn = rtn;
         this.isActive = isActive;
+    }
+
+    public int getIsSync() {
+        return isSync;
+    }
+
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
     }
 
     public String get_id() {

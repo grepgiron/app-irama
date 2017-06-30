@@ -3,42 +3,54 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-         >
+        android:layout_marginTop="4dp">
 
         <CheckBox
             android:id="@+id/check_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="4dp"
-            android:theme="@style/MyCheckBox"/>
+            android:layout_marginTop="16dp"
+            android:theme="@style/MyCheckBox" />
 
         <TextView
             android:id="@+id/client_item_list"
             android:layout_width="60dp"
-            android:text="Client"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="80dp"
             android:layout_marginTop="4dp"
-            android:layout_weight="0.39"
+            android:ellipsize="end"
             android:maxLength="12"
             android:minLines="1"
-            android:ellipsize="end"
+            android:text="Client"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/description_item_list"
+            android:layout_below="@+id/client_item_list"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:minLines="1"
+            android:maxLines="2"
+            android:text="Description"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
 
         <android.support.design.widget.CheckableImageButton
             android:id="@+id/edit_order_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="350dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/ic_info"/>
+            android:background="@drawable/ic_info" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

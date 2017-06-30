@@ -37,8 +37,12 @@ public class OrdersAdapter extends ArrayAdapter<order> {
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.check_state);
 
         tvClient.setText(order.getDescription());
+        if(order.isUrgent() != 1){
+            checkBox.setChecked(true);
+            checkBox.setClickable(false);
+        }
+
         checkBox.setChecked(true);
-        checkBox.setEnabled(false);
 
         return convertView;
     }
