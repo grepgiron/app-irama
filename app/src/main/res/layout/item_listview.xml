@@ -18,13 +18,13 @@
 
         <TextView
             android:id="@+id/client_item_list"
-            android:layout_width="60dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
-            android:maxLength="12"
             android:minLines="1"
+            android:maxLines="1"
             android:text="Client"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -46,7 +46,7 @@
             android:id="@+id/edit_order_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="350dp"
+            android:layout_marginLeft="320dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/ic_info" />
 
