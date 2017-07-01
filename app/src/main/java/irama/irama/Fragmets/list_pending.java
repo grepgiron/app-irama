@@ -10,7 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,7 @@ public class list_pending extends Fragment {
     private DBHelper dbHelper;
     private SQLiteDatabase db;
     private ArrayList<irama.irama.Models.order> arrayOfOrders;
+    private CheckBox checkBox;
     private order order;
     private OrdersAdapter ordersAdapter;
     private ListView listView;
@@ -64,11 +68,18 @@ public class list_pending extends Fragment {
                         db.close();
                     }
                 }
-
                 ordersAdapter = new OrdersAdapter(getContext(), arrayOfOrders );
                 listView.setAdapter(ordersAdapter);
             }
         }).start();
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox) v;
+                Toast.makeText(v.getContext(), "presed", Toast.LENGTH_SHORT);
+            }
+        };
 
         return vw;
     }
@@ -77,5 +88,9 @@ public class list_pending extends Fragment {
         dbHelper = new DBHelper(view.getContext());
         arrayOfOrders = new ArrayList<order>();
         listView = (ListView) view.findViewById(R.id.pending_listview);
+        checkBox = (CheckBox) view.findViewById(R.id.check_state);
     }
+
+
+
 }
