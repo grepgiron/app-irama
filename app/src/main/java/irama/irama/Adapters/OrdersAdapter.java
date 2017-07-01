@@ -34,15 +34,16 @@ public class OrdersAdapter extends ArrayAdapter<order> {
         }
 
         TextView tvClient = (TextView) convertView.findViewById(R.id.client_item_list);
+        TextView tvDescription = (TextView)convertView.findViewById(R.id.description_item_list);
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.check_state);
 
         tvClient.setText(order.getDescription());
-        if(order.isUrgent() != 1){
+        tvDescription.setText(order.getRequestOn());
+
+        if(order.getIsSync() != 1){
             checkBox.setChecked(true);
             checkBox.setClickable(false);
         }
-
-        checkBox.setChecked(true);
 
         return convertView;
     }

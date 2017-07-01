@@ -50,7 +50,8 @@ public class list_complete extends Fragment {
                         if(c.moveToFirst()) {
                             do {
                                 order = new order(c.getString(0).toString(),
-                                        1);
+                                        c.getString(1).toString(),c.getColumnIndex(c.getString(2)));
+                                Log.e(getClass().getSimpleName(), "get values " + c.getInt(2));
                                 Log.e(getClass().getSimpleName(), "Insert " + c.getString(0));
                                 arrayOfOrders.add(order);
                             }while (c.moveToNext());

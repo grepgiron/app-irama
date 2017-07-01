@@ -17,7 +17,7 @@ public final class feedSqlite {
         public static final String COLUMN_CLIENT_NAME = "name";
         public static final String COLUMN_CLIENT_RTN = "rtn";
         public static final String COLUMN_CLIENT_ACTIVE = "active";
-        public static final String COLUMN_CLIENT_SYNC = "sync";
+        public static final String COLUMN_CLIENT_SYNC = "clientSync";
 
         private static final String TEXT_TYPE = " TEXT";
         private static final String BOOLEAN_TYPE = " BOOLEAN";
@@ -70,7 +70,7 @@ public final class feedSqlite {
         public static final String COLUMN_ORDER_EMPLOYEE_ID = "employeeId";
         public static final String COLUMN_ORDER_SERIE_ID = "serieId";
         public static final String COLUMN_ORDER_ORDER_TYPE = "orderTypetId";
-        public static final String COLUMN_ORDER_SYNC = "sync";
+        public static final String COLUMN_ORDER_SYNC = "orderSync";
 
         private static final String TEXT_TYPE = " TEXT";
         private static final String BOOLEAN_TYPE = " BOOLEAN";
@@ -96,17 +96,17 @@ public final class feedSqlite {
 
         public static final String QUERY_COMPLETE_ORDER =
                 "SELECT "+ feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
-                        feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP +feedOrder.COLUMN_ORDER_URGENT +
+                        feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP +feedOrder.COLUMN_ORDER_SYNC +
                         " FROM " + feedClient.TABLE_NAME +" INNER JOIN " + feedOrder.TABLE_NAME +" ON "+
                         feedClient.TABLE_NAME +"."+_ID +" = " + feedOrder.TABLE_NAME+"."+_ID+ " AND " +
-                        feedOrder.COLUMN_ORDER_URGENT + " = 'false'";
+                        feedOrder.COLUMN_ORDER_SYNC + " = 0";
 
         public static final String QUERY_PENDING_ORDER =
                 "SELECT "+ feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
-                        feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP +feedOrder.COLUMN_ORDER_URGENT +
+                        feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP + feedOrder.COLUMN_ORDER_SYNC +
                         " FROM " + feedClient.TABLE_NAME +" INNER JOIN " + feedOrder.TABLE_NAME +" ON "+
                         feedClient.TABLE_NAME +"."+_ID +" = " + feedOrder.TABLE_NAME+"."+_ID+ " AND " +
-                        feedOrder.COLUMN_ORDER_URGENT + " = 'true'";
+                        feedOrder.COLUMN_ORDER_SYNC + " = 1";
     }
 
 }

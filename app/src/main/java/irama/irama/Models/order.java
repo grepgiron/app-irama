@@ -21,9 +21,10 @@ public class order {
     public order() {
     }
 
-    public order(String description, int isUrgent) {
+    public order(String description, String requestOn, int isSync) {
         this.description = description;
-        this.isUrgent = isUrgent;
+        this.requestOn = requestOn;
+        this.isSync = isSync;
     }
 
     public order(String description, int isUrgent, String requestOn, String code, String clientId, String productId, String employeeId, String serieId, String orderTypetId) {
