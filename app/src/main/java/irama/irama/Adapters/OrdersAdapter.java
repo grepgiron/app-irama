@@ -40,7 +40,7 @@ public class OrdersAdapter extends ArrayAdapter<order> {
         tvClient.setText(order.getDescription());
         tvDescription.setText(order.getRequestOn());
 
-        if(order.getIsSync() != 1){
+        if(order.getIsSync() == 1){
             checkBox.setChecked(true);
             checkBox.setClickable(false);
         }

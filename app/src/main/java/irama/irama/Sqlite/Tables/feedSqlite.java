@@ -99,14 +99,14 @@ public final class feedSqlite {
                         feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP +feedOrder.COLUMN_ORDER_SYNC +
                         " FROM " + feedClient.TABLE_NAME +" INNER JOIN " + feedOrder.TABLE_NAME +" ON "+
                         feedClient.TABLE_NAME +"."+_ID +" = " + feedOrder.TABLE_NAME+"."+_ID+ " AND " +
-                        feedOrder.COLUMN_ORDER_SYNC + " = 0";
+                        feedOrder.COLUMN_ORDER_SYNC + " = 1";
 
         public static final String QUERY_PENDING_ORDER =
                 "SELECT "+ feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
                         feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP + feedOrder.COLUMN_ORDER_SYNC +
                         " FROM " + feedClient.TABLE_NAME +" INNER JOIN " + feedOrder.TABLE_NAME +" ON "+
                         feedClient.TABLE_NAME +"."+_ID +" = " + feedOrder.TABLE_NAME+"."+_ID+ " AND " +
-                        feedOrder.COLUMN_ORDER_SYNC + " = 1";
+                        feedOrder.COLUMN_ORDER_SYNC + " = 0";
     }
 
 }
