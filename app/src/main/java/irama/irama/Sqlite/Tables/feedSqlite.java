@@ -14,6 +14,7 @@ public final class feedSqlite {
 
         public static final String TABLE_NAME = "clients";
         public static final String COLUMN_CLIENT_CODE = "code";
+        public static final String COLUMN_CLIENT_ID = "clientId";
         public static final String COLUMN_CLIENT_NAME = "name";
         public static final String COLUMN_CLIENT_RTN = "rtn";
         public static final String COLUMN_CLIENT_ACTIVE = "active";
@@ -26,6 +27,7 @@ public final class feedSqlite {
         public static final String SQL_CREATE_CLIENTS =
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY," +
+                        COLUMN_CLIENT_ID + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_NAME + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_RTN + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_CODE + TEXT_TYPE + COMMA_SEP +
@@ -107,6 +109,7 @@ public final class feedSqlite {
                         " FROM " + feedClient.TABLE_NAME +" INNER JOIN " + feedOrder.TABLE_NAME +" ON "+
                         feedClient.TABLE_NAME +"."+_ID +" = " + feedOrder.TABLE_NAME+"."+_ID+ " AND " +
                         feedOrder.COLUMN_ORDER_SYNC + " = 0";
+
     }
 
 }

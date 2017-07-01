@@ -13,14 +13,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:theme="@style/MyCheckBox" />
 
         <TextView
             android:id="@+id/client_item_list"
-            android:layout_width="220dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="1"
@@ -31,10 +31,10 @@
 
         <TextView
             android:id="@+id/description_item_list"
-            android:layout_width="220dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/client_item_list"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="2"
