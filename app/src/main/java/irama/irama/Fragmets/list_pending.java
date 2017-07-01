@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import irama.irama.Adapters.HolderAdapter;
 import irama.irama.Adapters.OrdersAdapter;
 import irama.irama.Models.order;
 import irama.irama.R;
@@ -34,14 +37,16 @@ public class list_pending extends Fragment {
     private ArrayList<irama.irama.Models.order> arrayOfOrders;
     private CheckBox checkBox;
     private order order;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter recyclerAdapter;
     private OrdersAdapter ordersAdapter;
-    private ListView listView;
+    private RecyclerView listView;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View vw = inflater.inflate(R.layout.fragment_listpending, container, false);
+        final View vw = inflater.inflate(R.layout.fragment_listpending, container, false);
         initComponents(vw);
 
         new Thread(new Runnable() {
@@ -68,8 +73,12 @@ public class list_pending extends Fragment {
                         db.close();
                     }
                 }
+                listView.setHasFixedSize(true);
+                listView.setLayoutManager(layoutManager);
+                recyclerAdapter = new HolderAdapter(arrayOfOrders, vw.getContext());
+                listView.setAdapter(recyclerAdapter);
                 ordersAdapter = new OrdersAdapter(getContext(), arrayOfOrders );
-                listView.setAdapter(ordersAdapter);
+
             }
         }).start();
 
@@ -87,8 +96,9 @@ public class list_pending extends Fragment {
     private void initComponents(View view){
         dbHelper = new DBHelper(view.getContext());
         arrayOfOrders = new ArrayList<order>();
-        listView = (ListView) view.findViewById(R.id.pending_listview);
+        listView = (RecyclerView) view.findViewById(R.id.pending_recyclerView);
         checkBox = (CheckBox) view.findViewById(R.id.check_state);
+        layoutManager = new LinearLayoutManager(view.getContext());
     }
 
 
