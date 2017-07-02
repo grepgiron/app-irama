@@ -117,9 +117,8 @@ public class home extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                syncDialog.setIcon(R.drawable.ic_assignment);
+                syncDialog.setIcon(R.drawable.ic_assignment_grey);
                 syncDialog.setTitle("Sync Data");
-
                 syncDialog.setPositiveButton("Sync", null);
                 syncDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -148,6 +147,7 @@ public class home extends AppCompatActivity {
             case R.id.sync_menu:
                 syncDialog.show();
                 break;
+
         }
 
         return true;

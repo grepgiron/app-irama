@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,14 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
             holder.checkBox.setChecked(true);
             holder.checkBox.setClickable(false);
         }
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Log.d("chechked", order.getDescription());
+                }
+            }
+        });
 
 
     }

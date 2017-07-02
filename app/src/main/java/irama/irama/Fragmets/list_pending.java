@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -90,6 +91,7 @@ public class list_pending extends Fragment {
             }
         };
 
+
         return vw;
     }
 
@@ -101,6 +103,20 @@ public class list_pending extends Fragment {
         layoutManager = new LinearLayoutManager(view.getContext());
     }
 
-
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.check_state:
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked) {
+                            Toast.makeText(getContext(), "nuevo click", Toast.LENGTH_SHORT);
+                        }
+                    }
+                });
+                break;
+        }
+        return true;
+    }
 }
