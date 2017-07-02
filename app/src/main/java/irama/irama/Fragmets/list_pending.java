@@ -57,13 +57,16 @@ public class list_pending extends Fragment {
                     db = dbHelper.getWritableDatabase();
                     Cursor c = db.rawQuery(feedSqlite.feedOrder.QUERY_PENDING_ORDER, null);
                     if(c != null){
+                        Log.e("Cursor", "get values " + c.getCount());
                         if(c.moveToFirst()) {
                             do {
-                                order = new order(c.getString(0).toString(),
-                                        c.getString(1).toString(),c.getInt(2));
-                                Log.e("List_Pending", "get values " + c.getInt(2));
-                                Log.e("List_Pending", "Insert " + c.getString(0));
-                                arrayOfOrders.add(order);
+                                if(c.getInt(2) == 0) {
+                                    order = new order(c.getString(0).toString(),
+                                            c.getString(1).toString(), c.getInt(2));
+                                    Log.e("List_Pending", "get values " + c.getInt(2));
+                                    Log.e("List_Pending", "Insert " + c.getString(0));
+                                    arrayOfOrders.add(order);
+                                }
                             }while (c.moveToNext());
                         }
                     }

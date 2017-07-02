@@ -10,6 +10,27 @@ public final class feedSqlite {
     private feedSqlite() {
     }
 
+    public static class feedUser implements BaseColumns{
+
+        public static final String TABLE_NAME = "users";
+        public static final String COLUMN_USER = "user";
+        public static final String COLUMN_PASS = "pass";
+
+        private static final String TEXT_TYPE = " TEXT";
+        private static final String COMMA_SEP = ",";
+
+        public static final String SQL_CREATE_USERS =
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                _ID + " INTEGER PRIMARY KEY," +
+                COLUMN_USER + TEXT_TYPE + COMMA_SEP +
+                COLUMN_PASS + TEXT_TYPE + " )";
+
+        public static final String SQL_DROP_USERS =
+                "DROP TABLE IF EXISTS " + TABLE_NAME;
+    }
+
+
+
     public static class feedClient implements BaseColumns{
 
         public static final String TABLE_NAME = "clients";
@@ -105,10 +126,14 @@ public final class feedSqlite {
 
         public static final String QUERY_PENDING_ORDER =
                 "SELECT "+ feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
-                        feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP + feedOrder.COLUMN_ORDER_SYNC +
-                        " FROM " + feedClient.TABLE_NAME +" INNER JOIN " + feedOrder.TABLE_NAME +" ON "+
-                        feedClient.TABLE_NAME +"."+_ID +" = " + feedOrder.TABLE_NAME+"."+_ID+ " AND " +
-                        feedOrder.COLUMN_ORDER_SYNC + " = 0";
+                        feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP +feedOrder.COLUMN_ORDER_SYNC +
+                        " FROM " + feedOrder.TABLE_NAME +" LEFT JOIN " + feedClient.TABLE_NAME +" ON "+
+                        feedOrder.TABLE_NAME +"."+COLUMN_ORDER_CLIENT_ID +" = " + feedClient.TABLE_NAME+"."+_ID+ " UNION ALL " +
+                        "SELECT "+ feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
+                        feedOrder.COLUMN_ORDER_DESCRIPTION + COMMA_SEP +feedOrder.COLUMN_ORDER_SYNC +
+                        " FROM " + feedClient.TABLE_NAME +" LEFT JOIN " + feedOrder.TABLE_NAME +" ON "+
+                        feedOrder.TABLE_NAME +"."+COLUMN_ORDER_CLIENT_ID +" = " + feedClient.TABLE_NAME+"."+_ID + " WHERE " +
+                        feedOrder.TABLE_NAME +"."+COLUMN_ORDER_CLIENT_ID + " = 0";
 
     }
 

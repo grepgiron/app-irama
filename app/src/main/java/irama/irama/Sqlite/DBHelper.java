@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(feedSqlite.feedClient.SQL_CREATE_CLIENTS);
         db.execSQL(feedSqlite.feedProductCategory.SQL_CREATE_CATEGORY);
         db.execSQL(feedSqlite.feedOrder.SQL_CREATE_ORDER);
-
+        db.execSQL(feedSqlite.feedUser.SQL_CREATE_USERS);
     }
 
     @Override
@@ -33,6 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(feedSqlite.feedClient.SQL_DROP_CLIENTS);
         db.execSQL(feedSqlite.feedProductCategory.SQL_DROP_CATEGORY);
         db.execSQL(feedSqlite.feedOrder.SQL_DROP_ORDER);
+        db.execSQL(feedSqlite.feedUser.SQL_DROP_USERS);
         onCreate(db);
     }
 }
