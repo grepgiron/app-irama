@@ -34,7 +34,7 @@ public class list_pending extends Fragment {
 
     private DBHelper dbHelper;
     private SQLiteDatabase db;
-    private ArrayList<irama.irama.Models.order> arrayOfOrders;
+    private ArrayList<order> arrayOfOrders;
     private CheckBox checkBox;
     private order order;
     private RecyclerView.LayoutManager layoutManager;

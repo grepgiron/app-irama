@@ -2,11 +2,13 @@ package irama.irama.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +40,9 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(HolderAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final HolderAdapter.ViewHolder holder, int position) {
 
-        order order = orders.get(position);
+        final order order = orders.get(position);
 
         holder.tvClient.setText(order.getDescription());
         holder.tvDescription.setText(order.getRequestOn());
@@ -50,12 +52,14 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
             holder.checkBox.setClickable(false);
         }
 
+
     }
 
     @Override
     public int getItemCount() {
         return (null != orders ? orders.size() : 0);
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -69,5 +73,6 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
             this.tvDescription = (TextView)itemView.findViewById(R.id.description_item_list);
             this.checkBox = (CheckBox)itemView.findViewById(R.id.check_state);
         }
+
     }
 }
