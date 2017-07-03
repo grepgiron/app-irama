@@ -17,6 +17,8 @@ import java.util.List;
 import irama.irama.Models.order;
 import irama.irama.R;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by enagi on 1/7/2017.
  */
@@ -70,7 +72,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         protected TextView tvClient;
         protected TextView tvDescription;
@@ -78,10 +80,15 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
 
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             this.tvClient = (TextView)itemView.findViewById(R.id.client_item_list);
             this.tvDescription = (TextView)itemView.findViewById(R.id.description_item_list);
             this.checkBox = (CheckBox)itemView.findViewById(R.id.check_state);
         }
 
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, "onClick " + getPosition() + " " + orders.get(getPosition()).getDescription());
+        }
     }
 }
