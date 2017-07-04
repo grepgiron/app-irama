@@ -80,6 +80,32 @@ public final class feedSqlite {
                 "DROP IF EXISTS " + TABLE_NAME;
     }
 
+    public static class feedOrderType implements BaseColumns{
+
+        public static final String TABLE_NAME = "orderType";
+        public static final String COLUMN_ORDERTYPE_CODE = "code";
+        public static final String COLUMN_ORDERTYPE_NAME = "name";
+        public static final String COLUMN_ORDERTYPE_DESCRIPTION = "description";
+        public static final String COLUMN_ORDERTYPE_ISACTIVE = "isActive";
+
+        private static final String TEXT_TYPE = " TEXT";
+        private static final String COMMA_SEP = ",";
+        private static final String BOOLEAN_TYPE = " BOOLEAN";
+
+
+        public static final String SQL_CREATE_ORDERTYPE =
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                        _ID + " INTEGER PRIMARY KEY," +
+                        COLUMN_ORDERTYPE_CODE + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_ORDERTYPE_NAME + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_ORDERTYPE_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_ORDERTYPE_ISACTIVE + BOOLEAN_TYPE + " )";
+
+        public static final String SQL_DROP_ORDERTYPE =
+                "DROP IF EXISTS " + TABLE_NAME;
+    }
+
+
     public static final class feedOrder implements BaseColumns{
 
         public static final String TABLE_NAME = "orders";
