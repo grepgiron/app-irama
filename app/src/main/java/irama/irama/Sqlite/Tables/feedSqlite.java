@@ -25,6 +25,10 @@ public final class feedSqlite {
                 COLUMN_USER + TEXT_TYPE + COMMA_SEP +
                 COLUMN_PASS + TEXT_TYPE + " )";
 
+        public static final String SQL_LOGIN =
+                "SELECT " + COLUMN_USER + " FROM " + TABLE_NAME + " WHERE "
+                        + COLUMN_USER + "='?' AND " + COLUMN_PASS + "='?' ";
+
         public static final String SQL_DROP_USERS =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
     }

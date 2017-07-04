@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="12dp">
+    android:layout_margin="12dp"
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/pending_recyclerView"
@@ -12,6 +13,7 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
+        android:animateLayoutChanges="?attr/scrimAnimationDuration"
         >
 
     </android.support.v7.widget.RecyclerView>

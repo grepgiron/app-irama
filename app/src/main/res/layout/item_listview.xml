@@ -6,6 +6,7 @@
     android:padding="4dp"
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground"
+    android:animateLayoutChanges="true"
     >
 
         <CheckBox
@@ -57,5 +58,39 @@
             android:layout_alignParentEnd="true"
             android:layout_toRightOf="@+id/description_item_list"
             android:layout_toEndOf="@+id/description_item_list" />
+        <RelativeLayout
+            android:id="@+id/new_oo"
+            android:layout_width="match_parent"
+            android:layout_below="@id/description_item_list"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@color/btn_login_bg"
+            android:elevation="-6dp"
+            android:animateLayoutChanges="true">
+
+                <Button
+                    android:id="@+id/save"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:textIsSelectable="true"
+                    android:text="Sync"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:layout_toLeftOf="@+id/button"
+                    android:layout_toStartOf="@+id/button" />
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:textIsSelectable="true"
+                    android:text="Delete"
+                    android:clickable="true"
+                    android:textColor="@color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/button" />
+
+        </RelativeLayout>
 
 </RelativeLayout>
