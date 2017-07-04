@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
         if(order.getIsSync() == 1){
             holder.checkBox.setChecked(true);
             holder.checkBox.setClickable(false);
+            holder.imageView.setVisibility(View.INVISIBLE);
         }
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -77,6 +79,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
         protected TextView tvClient;
         protected TextView tvDescription;
         protected CheckBox checkBox;
+        protected ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -84,6 +87,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
             this.tvClient = (TextView)itemView.findViewById(R.id.client_item_list);
             this.tvDescription = (TextView)itemView.findViewById(R.id.description_item_list);
             this.checkBox = (CheckBox)itemView.findViewById(R.id.check_state);
+            this.imageView = (ImageView)itemView.findViewById(R.id.delete_order);
         }
 
         @Override

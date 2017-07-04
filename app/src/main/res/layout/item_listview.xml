@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/client_item_list"
-            android:layout_width="240dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="72dp"
             android:layout_marginTop="4dp"
@@ -42,14 +42,20 @@
             android:minLines="1"
             android:text="Description"
             android:textSize="12sp" />
-
-
-        <android.support.design.widget.CheckableImageButton
-            android:id="@+id/edit_order_button"
+        <ImageView
+            android:id="@+id/delete_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/ic_info" />
+            android:padding="6dp"
+            android:src="@drawable/ic_info"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:visibility="visible"
+            android:layout_alignTop="@+id/client_item_list"
+            android:layout_alignBottom="@+id/check_state"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/description_item_list"
+            android:layout_toEndOf="@+id/description_item_list" />
 
 </RelativeLayout>
