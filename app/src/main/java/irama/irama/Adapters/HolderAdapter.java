@@ -107,12 +107,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
 
         @Override
         public void onClick(final View v) {
-
-        }
-
-        @Override
-        public boolean onLongClick(final View v) {
-          /*  View someView = v.findViewById(R.id.new_oo);
+             /*  View someView = v.findViewById(R.id.new_oo);
             someView.setVisibility(View.VISIBLE);*/
             if (originalHeight == 0) {
                 originalHeight = v.getHeight();
@@ -131,18 +126,18 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
 
                 Animation a = new AlphaAnimation(1.00f, 0.00f); // Fade out
 
-                a.setDuration(100);
+                a.setDuration(500);
                 // Set a listener to the animation and configure onAnimationEnd
                 a.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-
+                        someView.setVisibility(View.GONE);
+                        someView.setEnabled(false);
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        someView.setVisibility(View.GONE);
-                        someView.setEnabled(false);
+
                     }
 
                     @Override
@@ -166,6 +161,12 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
 
 
             valueAnimator.start();
+
+        }
+
+        @Override
+        public boolean onLongClick(final View v) {
+
 
 
 

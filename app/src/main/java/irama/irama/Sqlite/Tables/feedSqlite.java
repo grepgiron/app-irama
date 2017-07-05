@@ -27,7 +27,7 @@ public final class feedSqlite {
 
         public static final String SQL_LOGIN =
                 "SELECT " + COLUMN_USER + " FROM " + TABLE_NAME + " WHERE "
-                        + COLUMN_USER + "='?' AND " + COLUMN_PASS + "='?' ";
+                        + COLUMN_USER + "=? AND " + COLUMN_PASS + "=?";
 
         public static final String SQL_DROP_USERS =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;

@@ -1,5 +1,6 @@
 package irama.irama;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -51,9 +52,15 @@ public class login extends AppCompatActivity {
     }
 
     private void login(){
-        String[] string = {tvUser.getText().toString(), tvPass.getText().toString()};
 
-        Cursor c = db.rawQuery(feedSqlite.feedUser.SQL_LOGIN, string);
-        Log.d("cursor", String.valueOf(c.getCount()));
+        Cursor c = db.rawQuery(feedSqlite.feedUser.SQL_LOGIN, new String[] { tvUser.getText().toString(), tvPass.getText().toString()});
+
+        if(c.getCount()>0){
+
+            Log.d("cursor", String.valueOf(c.getCount()));
+            Intent intent = new Intent(login.this, home.class);
+            startActivity(intent);
+        }
+
     }
 }
