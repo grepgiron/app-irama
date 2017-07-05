@@ -83,7 +83,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
         protected TextView tvClient;
         protected TextView tvDescription;
         protected CheckBox checkBox;
-        protected ImageView imageView;
+        protected TextView textView;
         protected View someView;
 
         private int originalHeight = 0;
@@ -97,7 +97,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
             this.tvClient = (TextView)itemView.findViewById(R.id.client_item_list);
             this.tvDescription = (TextView)itemView.findViewById(R.id.description_item_list);
             this.checkBox = (CheckBox)itemView.findViewById(R.id.check_state);
-            this.imageView = (ImageView)itemView.findViewById(R.id.delete_order);
+            this.textView = (TextView)itemView.findViewById(R.id.date_order);
             if (isViewExpanded == false) {
                 // Set Views to View.GONE and .setEnabled(false)
                 someView.setVisibility(View.GONE);

@@ -14,6 +14,6 @@
     <color name="input_register_hint">#5e6266</color>
     <color name="btn_login">#26ae90</color>
     <color name="btn_login_bg">#eff0f2</color>
-    <color name="lbl_name">#333333</color>
+    <color name="lbl_name">#e3ef4848</color>
     <color name="floatingButton">#ff6861</color>
 </resources>

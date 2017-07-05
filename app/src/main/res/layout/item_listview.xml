@@ -21,7 +21,7 @@
             android:id="@+id/client_item_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="72dp"
+            android:layout_marginLeft="62dp"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="1"
@@ -35,21 +35,19 @@
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/client_item_list"
-            android:layout_marginLeft="72dp"
+            android:layout_marginLeft="62dp"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:minLines="1"
             android:text="Description"
             android:textSize="12sp" />
-        <ImageView
-            android:id="@+id/delete_order"
+        <TextView
+            android:id="@+id/date_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="6dp"
-            android:src="@drawable/ic_info"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
+            android:text="Date"
             android:visibility="visible"
             android:layout_alignTop="@+id/client_item_list"
             android:layout_alignBottom="@+id/check_state"
@@ -64,7 +62,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone"
-            android:background="@color/btn_login_bg"
+            android:background="@color/colorPrimaryDark"
             android:elevation="-6dp"
             >
 
@@ -76,6 +74,7 @@
                     android:text="Sync"
                     android:textColor="@color/white"
                     android:clickable="true"
+                    android:background="@color/colorAccent"
                     android:layout_toLeftOf="@+id/button"
                     android:layout_toStartOf="@+id/button" />
                 <Button
@@ -84,6 +83,7 @@
                     android:textIsSelectable="true"
                     android:text="Delete"
                     android:clickable="true"
+                    android:background="@color/lbl_name"
                     android:textColor="@color/white"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
