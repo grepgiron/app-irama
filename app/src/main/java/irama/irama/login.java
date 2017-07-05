@@ -58,7 +58,7 @@ public class login extends AppCompatActivity {
         if(c.getCount()>0){
 
             Log.d("cursor", String.valueOf(c.getCount()));
-            Intent intent = new Intent(login.this, home.class);
+            Intent intent = new Intent(login.this, splash_screen.class);
             startActivity(intent);
         }
 
