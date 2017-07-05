@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,6 +40,13 @@ public class splash_screen extends AppCompatActivity {
         animator.setInterpolator(new DecelerateInterpolator());
         animator.start();
 
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getData();
+            }
+        },5000);
     }
 
     private void initComponents(){
@@ -50,6 +58,10 @@ public class splash_screen extends AppCompatActivity {
 
     private void getData(){
 
+        Animation in = AnimationUtils.loadAnimation(splash_screen.this, R.anim.open_animation);
+
+        this.textView.setAnimation(in);
+        this.textView.setText("Obteniendo Clients...");
 
 
 
