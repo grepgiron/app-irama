@@ -1,7 +1,9 @@
 package irama.irama;
 
 import android.animation.ObjectAnimator;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +17,8 @@ import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import irama.irama.Sqlite.DBHelper;
+
 /**
  * Created by enagi on 5/7/2017.
  */
@@ -26,6 +30,9 @@ public class splash_screen extends AppCompatActivity {
     private TextView textView;
     private ObjectAnimator animator;
     private Boolean isFinish;
+    private SQLiteDatabase db;
+    private DBHelper dbHelper;
+    private ContentValues values;
 
 
     @Override
@@ -50,6 +57,10 @@ public class splash_screen extends AppCompatActivity {
     }
 
     private void initComponents(){
+
+        dbHelper = new DBHelper(splash_screen.this);
+        db = dbHelper.getWritableDatabase();
+        values = new ContentValues();
         progressBar = (ProgressBar)findViewById(R.id.progress_bar);
         animation = AnimationUtils.loadAnimation(splash_screen.this, R.anim.anim_download);
         textView = (TextView)findViewById(R.id.text2a);
@@ -59,9 +70,9 @@ public class splash_screen extends AppCompatActivity {
     private void getData(){
 
         Animation in = AnimationUtils.loadAnimation(splash_screen.this, R.anim.open_animation);
-
         this.textView.setAnimation(in);
         this.textView.setText("Obteniendo Clients...");
+
 
 
 
