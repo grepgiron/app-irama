@@ -63,13 +63,13 @@
             android:layout_below="@id/description_item_list"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@color/input_login_hint"
             android:elevation="-6dp"
             >
 
                 <Button
-                    android:id="@+id/save"
+                    android:id="@+id/sync_order"
                     android:layout_width="80dp"
                     android:layout_height="40dp"
                     android:textIsSelectable="true"
@@ -77,20 +77,21 @@
                     android:textColor="@color/white"
                     android:clickable="true"
                     android:background="@color/colorAccent"
-                    android:layout_toLeftOf="@+id/button"
-                    android:layout_toStartOf="@+id/button" />
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/edit_order"
+                    android:layout_toStartOf="@+id/edit_order" />
                 <Button
                     android:layout_width="80dp"
                     android:layout_height="40dp"
                     android:textIsSelectable="true"
-                    android:text="Delete"
+                    android:text="Editar"
                     android:clickable="true"
                     android:background="@color/lbl_name"
                     android:textColor="@color/white"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:id="@+id/button" />
+                    android:id="@+id/edit_order" />
 
         </RelativeLayout>
 

@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".home">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
 
 
@@ -17,6 +21,14 @@
 
         <activity android:name=".new_order"
             android:label="new order">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+
+            </intent-filter>
         </activity>
 
         <activity android:name=".login"
@@ -26,10 +38,7 @@
         </activity>
         <activity android:name=".splash_screen"
             android:label="irama">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
 
         </activity>

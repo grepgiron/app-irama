@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -58,6 +59,8 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
         if(order.getIsSync() == 1){
             holder.checkBox.setChecked(true);
             holder.checkBox.setClickable(false);
+            holder.sync.setEnabled(false);
+            holder.edit.setEnabled(false);
 
         }
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -82,6 +85,8 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
 
         protected TextView tvClient;
         protected TextView tvDescription;
+        protected Button sync;
+        protected Button edit;
         protected CheckBox checkBox;
         protected TextView textView;
         protected View someView;
@@ -96,6 +101,8 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
             this.someView = itemView.findViewById(R.id.new_oo);
             this.tvClient = (TextView)itemView.findViewById(R.id.client_item_list);
             this.tvDescription = (TextView)itemView.findViewById(R.id.description_item_list);
+            this.sync = (Button)itemView.findViewById(R.id.sync_order);
+            this.edit = (Button)itemView.findViewById(R.id.edit_order);
             this.checkBox = (CheckBox)itemView.findViewById(R.id.check_state);
             this.textView = (TextView)itemView.findViewById(R.id.date_order);
             if (isViewExpanded == false) {
@@ -107,16 +114,14 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
 
         @Override
         public void onClick(final View v) {
-             /*  View someView = v.findViewById(R.id.new_oo);
-            someView.setVisibility(View.VISIBLE);*/
+
             if (originalHeight == 0) {
                 originalHeight = v.getHeight();
             }
 
-            // Declare a ValueAnimator object
             ValueAnimator valueAnimator;
             if (!isViewExpanded) {
-                valueAnimator = ValueAnimator.ofInt(originalHeight, originalHeight + (int) (originalHeight * 1.0)); // These values in this method can be changed to expand however much you like
+                valueAnimator = ValueAnimator.ofInt(originalHeight, originalHeight + (int) (originalHeight * 1.0));
                 someView.setVisibility(View.VISIBLE);
                 someView.setEnabled(true);
                 isViewExpanded = true;
@@ -124,10 +129,9 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
                 isViewExpanded = false;
                 valueAnimator = ValueAnimator.ofInt(originalHeight + (int) (originalHeight * 1.0), originalHeight);
 
-                Animation a = new AlphaAnimation(1.00f, 0.00f); // Fade out
+                Animation a = new AlphaAnimation(1.00f, 0.00f);
 
                 a.setDuration(500);
-                // Set a listener to the animation and configure onAnimationEnd
                 a.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
@@ -146,7 +150,6 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
                     }
                 });
 
-                // Set the animation on the custom view
                 someView.startAnimation(a);
             }
             valueAnimator.setDuration(500);
