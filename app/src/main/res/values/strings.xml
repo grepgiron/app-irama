@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">irama</string>
     <string name="app_search">Buscar</string>
-    <string name="app_search_hint">RTN</string>
+    <string name="search_hint">rtn</string>
 </resources>

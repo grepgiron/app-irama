@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import irama.irama.Models.order;
+import irama.irama.Models.parameters;
 import irama.irama.R;
 
 import static android.content.ContentValues.TAG;
@@ -31,12 +32,12 @@ import static android.content.ContentValues.TAG;
 
 public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder> {
 
-    private ArrayList<order> orders;
+    private ArrayList<parameters> parameterses;
     private Context context;
 
 
-    public HolderAdapter(ArrayList<order> orders, Context context) {
-        this.orders = orders;
+    public HolderAdapter(ArrayList<parameters> parameters, Context context) {
+        this.parameterses = parameters;
         this.context = context;
     }
 
@@ -51,12 +52,12 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final HolderAdapter.ViewHolder holder, int position) {
 
-        final order order = orders.get(position);
+        final parameters parameters = parameterses.get(position);
 
-        holder.tvClient.setText(order.getDescription());
-        holder.tvDescription.setText(order.getRequestOn());
+        holder.tvClient.setText(parameters.getName());
+        holder.tvDescription.setText(parameters.getDescription());
 
-        if(order.getIsSync() == 1){
+        if(parameters.getIsSync() == 1){
             holder.checkBox.setChecked(true);
             holder.checkBox.setClickable(false);
             holder.sync.setEnabled(false);
@@ -67,7 +68,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    Log.d("chechked", order.getDescription());
+                    Log.d("chechked", parameters.getDescription());
                 }
             }
         });
@@ -77,7 +78,7 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return (null != orders ? orders.size() : 0);
+        return (null != parameterses ? parameterses.size() : 0);
     }
 
 

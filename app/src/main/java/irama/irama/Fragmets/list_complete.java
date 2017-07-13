@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import irama.irama.Adapters.HolderAdapter;
 import irama.irama.Adapters.OrdersAdapter;
 import irama.irama.Models.order;
+import irama.irama.Models.parameters;
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
 import irama.irama.Sqlite.Tables.feedSqlite;
@@ -35,9 +36,9 @@ public class list_complete extends Fragment {
 
     private DBHelper dbHelper;
     private SQLiteDatabase db;
-    private ArrayList<irama.irama.Models.order> arrayOfOrders;
+    private ArrayList<parameters> arrayOfOrders;
     private CheckBox checkBox;
-    private order order;
+    private parameters parameters;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
     private OrdersAdapter ordersAdapter;
@@ -59,11 +60,11 @@ public class list_complete extends Fragment {
                         if (c.moveToFirst()) {
                             do {
                                 if(c.getInt(2) == 1) {
-                                    order = new order(c.getString(0).toString(),
-                                            c.getString(1).toString(), c.getInt(2));
+                                    parameters = new parameters(c.getString(0).toString(),
+                                            c.getString(1).toString(),"  "," ", c.getInt(2));
                                     Log.e("List_Pending", "get values " + c.getInt(2));
                                     Log.e("List_Pending", "Insert " + c.getString(0));
-                                    arrayOfOrders.add(order);
+                                    arrayOfOrders.add(parameters);
                                 }
                             } while (c.moveToNext());
                         }
@@ -97,7 +98,7 @@ public class list_complete extends Fragment {
 
     private void initComponents(View view) {
         dbHelper = new DBHelper(view.getContext());
-        arrayOfOrders = new ArrayList<order>();
+        arrayOfOrders = new ArrayList<parameters>();
         listView = (RecyclerView) view.findViewById(R.id.complete_recyclerView);
         checkBox = (CheckBox) view.findViewById(R.id.check_state);
         layoutManager = new LinearLayoutManager(view.getContext());

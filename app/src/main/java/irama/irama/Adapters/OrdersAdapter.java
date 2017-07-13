@@ -13,22 +13,23 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import irama.irama.Models.order;
+import irama.irama.Models.parameters;
 import irama.irama.R;
 
 /**
  * Created by enagi on 28/6/2017.
  */
 
-public class OrdersAdapter extends ArrayAdapter<order> {
+public class OrdersAdapter extends ArrayAdapter<parameters> {
 
-    public OrdersAdapter(Context context, ArrayList<order> orders){
-        super(context, 0, orders);
+    public OrdersAdapter(Context context, ArrayList<parameters> parameterses){
+        super(context, 0, parameterses);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        order order = getItem(position);
+        parameters parameters = getItem(position);
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_listview, parent , false);
         }
@@ -37,10 +38,10 @@ public class OrdersAdapter extends ArrayAdapter<order> {
         TextView tvDescription = (TextView)convertView.findViewById(R.id.description_item_list);
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.check_state);
 
-        tvClient.setText(order.getDescription());
-        tvDescription.setText(order.getRequestOn());
+        tvClient.setText(parameters.getName());
+        tvDescription.setText(parameters.getDescription());
 
-        if(order.getIsSync() == 1){
+        if(parameters.getIsSync() == 1){
             checkBox.setChecked(true);
             checkBox.setClickable(false);
         }
