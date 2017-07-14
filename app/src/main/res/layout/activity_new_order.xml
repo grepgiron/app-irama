@@ -37,12 +37,22 @@
             android:layout_margin="16dp"
             android:orientation="vertical">
 
-           <ListView
-               android:id="@+id/client_list"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
+            <SearchView
+                android:id="@+id/search_client"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:queryHint="Buscar"
+                android:iconifiedByDefault="false"
+                >
 
-           </ListView>
+            </SearchView>
+
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/client_recycler"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+           </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 

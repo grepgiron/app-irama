@@ -82,7 +82,7 @@ public class list_pending extends Fragment {
                 listView.setLayoutManager(layoutManager);
                 recyclerAdapter = new HolderAdapter(arrayOfOrders, vw.getContext());
                 listView.setAdapter(recyclerAdapter);
-                ordersAdapter = new OrdersAdapter(getContext(), arrayOfOrders );
+                //ordersAdapter = new OrdersAdapter(getContext(), arrayOfOrders );
 
             }
         }).start();

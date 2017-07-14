@@ -10,13 +10,13 @@ public class clients {
     private String code;
     private String name;
     private String rtn;
-    private boolean isActive;
+    private int isActive;
     public int isSync;
 
     public clients() {
     }
 
-    public clients(String _id, String code, String name, String rtn, boolean isActive) {
+    public clients(String _id, String name, String rtn, String code,  int isActive) {
         this._id = _id;
         this.code = code;
         this.name = name;
@@ -24,7 +24,7 @@ public class clients {
         this.isActive = isActive;
     }
 
-    public clients(String _id, String name, String rtn, boolean isActive) {
+    public clients(String _id, String name, String rtn, int isActive) {
         this._id = _id;
         this.name = name;
         this.rtn = rtn;
@@ -71,11 +71,11 @@ public class clients {
         this.rtn = rtn;
     }
 
-    public boolean getIsActive() {
+    public int getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(boolean isActive) {
+    public void setIsActive(int isActive) {
         this.isActive = isActive;
     }
 }

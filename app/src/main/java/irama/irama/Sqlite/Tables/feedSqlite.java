@@ -61,6 +61,16 @@ public final class feedSqlite {
 
         public static final String SQL_DROP_CLIENTS =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
+
+        public static final String QUERY_CLIENTS =
+                "SELECT " + _ID + COMMA_SEP +
+                        feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
+                        feedClient.COLUMN_CLIENT_RTN + COMMA_SEP +
+                        feedClient.COLUMN_CLIENT_CODE + COMMA_SEP +
+                        feedClient.COLUMN_CLIENT_ACTIVE +
+                        " FROM " + feedClient.TABLE_NAME;
+
+
     }
 
     public static class feedProductCategory implements BaseColumns{

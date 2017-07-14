@@ -116,6 +116,8 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
         @Override
         public void onClick(final View v) {
 
+            Log.e("Click", parameterses.get(this.getPosition()).getName());
+
             if (originalHeight == 0) {
                 originalHeight = v.getHeight();
             }
