@@ -30,9 +30,11 @@ public class new_order extends AppCompatActivity {
     private SQLiteDatabase sqLiteDatabase;
     private ArrayList<clients> arrayOfClients;
     private clients clients;
+    private ClientsAdapter clientsAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
     private RecyclerView recyclerView;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,23 @@ public class new_order extends AppCompatActivity {
         recyclerAdapter = new ClientsAdapter(arrayOfClients, getBaseContext());
         recyclerView.setAdapter(recyclerAdapter);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                try {
+                    clientsAdapter.getFilter().filter(newText);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                return false;
+            }
+        });
 
 
     }
@@ -84,7 +103,7 @@ public class new_order extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         arrayOfClients = new ArrayList<clients>();
         recyclerView = (RecyclerView)findViewById(R.id.client_recycler);
-
+        searchView = (SearchView)findViewById(R.id.search_client);
     }
 
 

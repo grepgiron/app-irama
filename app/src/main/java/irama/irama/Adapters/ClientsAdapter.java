@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,10 +20,12 @@ import irama.irama.R;
  * Created by grego on 13/7/2017.
  */
 
-public class ClientsAdapter extends RecyclerView.Adapter<ClientsAdapter.ViewHolder> {
+public class ClientsAdapter extends RecyclerView.Adapter<ClientsAdapter.ViewHolder> implements Filterable {
 
-    private ArrayList<clients> clientses;
-    private Context context;
+    ArrayList<clients> clientses;
+    Context context;
+    CustomFilter filter;
+
 
     public ClientsAdapter(ArrayList<clients> clientses, Context context) {
         this.clientses = clientses;
@@ -50,6 +54,14 @@ public class ClientsAdapter extends RecyclerView.Adapter<ClientsAdapter.ViewHold
     @Override
     public int getItemCount() {
         return (null != clientses ? clientses.size() : 0);
+    }
+
+    @Override
+    public Filter getFilter() {
+        if(filter != null){
+            filter = new CustomFilter(this, clientses);
+        }
+        return filter;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
