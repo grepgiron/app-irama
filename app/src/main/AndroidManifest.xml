@@ -15,8 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-
-
         </activity>
 
         <activity android:name=".new_order"
@@ -28,20 +26,19 @@
         <activity android:name=".login"
             android:label="irama">
 
-
         </activity>
+
         <activity android:name=".splash_screen"
             android:label="irama">
-
-
 
         </activity>
 
         <activity android:name=".detail_order"
             android:label="irama">
+        </activity>
 
-
-
+        <activity android:name=".new_client"
+            android:label="irama">
         </activity>
 
 
