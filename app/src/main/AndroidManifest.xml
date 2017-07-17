@@ -19,7 +19,7 @@
 
         <activity android:name=".new_order"
             android:label="new order"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            >
 
         </activity>
 
@@ -39,6 +39,7 @@
 
         <activity android:name=".new_client"
             android:label="irama">
+
         </activity>
 
 

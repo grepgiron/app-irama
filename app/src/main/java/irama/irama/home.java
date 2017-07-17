@@ -146,11 +146,10 @@ public class home extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.sync_menu:
                 syncDialog.show();
-                break;
-
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return true;
     }
 
     public void initComponents(){

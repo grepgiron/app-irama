@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -39,14 +41,14 @@ public class new_order extends AppCompatActivity {
     private SearchView searchView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
 
         initComponents();
         layoutManager = new LinearLayoutManager(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_order);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_orders);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,13 +112,6 @@ public class new_order extends AppCompatActivity {
 
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater =getMenuInflater();
         inflater.inflate(R.menu.menu_new, menu);
@@ -130,10 +125,22 @@ public class new_order extends AppCompatActivity {
                 Intent intent = new Intent(new_order.this, new_client.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                break;
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
+    }
 
-        return true;
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 }
