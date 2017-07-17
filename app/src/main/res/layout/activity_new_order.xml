@@ -40,7 +40,7 @@
             <SearchView
                 android:id="@+id/search_client"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:queryHint="Buscar"
                 android:iconifiedByDefault="false"
                 >

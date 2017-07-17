@@ -37,6 +37,14 @@
 
         </activity>
 
+        <activity android:name=".detail_order"
+            android:label="irama">
+
+
+
+        </activity>
+
+
     </application>
 
 </manifest>

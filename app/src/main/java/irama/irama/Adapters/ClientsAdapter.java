@@ -1,6 +1,7 @@
 package irama.irama.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 import irama.irama.Models.clients;
 import irama.irama.R;
+import irama.irama.detail_order;
 
 /**
  * Created by grego on 13/7/2017.
@@ -82,6 +85,9 @@ public class ClientsAdapter extends RecyclerView.Adapter<ClientsAdapter.ViewHold
         @Override
         public void onClick(View v) {
             Log.e(getClass().getName().toString(), clientses.get(this.getPosition()).getName());
+            Intent intent = new Intent(context, detail_order.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         }
     }
 
