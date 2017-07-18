@@ -102,7 +102,6 @@ public class new_order extends AppCompatActivity {
             }
         });
 
-
     }
 
     void initComponents(){
