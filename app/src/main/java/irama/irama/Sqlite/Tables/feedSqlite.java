@@ -42,6 +42,8 @@ public final class feedSqlite {
         public static final String COLUMN_CLIENT_ID = "clientId";
         public static final String COLUMN_CLIENT_NAME = "name";
         public static final String COLUMN_CLIENT_RTN = "rtn";
+        public static final String COLUMN_CLIENT_EMAIL = "email";
+        public static final String COLUMN_CLIENT_DIRECTION = "direction";
         public static final String COLUMN_CLIENT_ACTIVE = "active";
         public static final String COLUMN_CLIENT_SYNC = "clientSync";
 
@@ -56,6 +58,8 @@ public final class feedSqlite {
                         COLUMN_CLIENT_NAME + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_RTN + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_CODE + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_CLIENT_EMAIL + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_CLIENT_DIRECTION + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_ACTIVE + BOOLEAN_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_SYNC + BOOLEAN_TYPE + " )";
 

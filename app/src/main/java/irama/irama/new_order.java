@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,6 +40,7 @@ public class new_order extends AppCompatActivity {
     private RecyclerView.Adapter recyclerAdapter;
     private RecyclerView recyclerView;
     private SearchView searchView;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,6 +110,7 @@ public class new_order extends AppCompatActivity {
         arrayOfClients = new ArrayList<clients>();
         recyclerView = (RecyclerView)findViewById(R.id.client_recycler);
         searchView = (SearchView)findViewById(R.id.search_client);
+
     }
 
 
