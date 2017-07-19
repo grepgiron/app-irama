@@ -81,42 +81,47 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
     }
 
     private void insertClient(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(!TextUtils.isEmpty(name.getText().toString()) || !TextUtils.isEmpty(rtn.getText().toString())){
+                    try {
+                        sqLiteDatabase = dbHelper.getWritableDatabase();
 
-        if(!TextUtils.isEmpty(name.getText().toString()) || !TextUtils.isEmpty(rtn.getText().toString())){
-            try {
-                sqLiteDatabase = dbHelper.getWritableDatabase();
-                values = new ContentValues();
+                        values = new ContentValues();
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_NAME, name.getText().toString());
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_RTN, rtn.getText().toString());
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_EMAIL, email.getText().toString());
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_DIRECTION, direction.getText().toString());
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_PHONE, phone.getText().toString());
 
-                values.put(feedSqlite.feedClient.COLUMN_CLIENT_NAME, name.getText().toString());
-                values.put(feedSqlite.feedClient.COLUMN_CLIENT_RTN, rtn.getText().toString());
-                values.put(feedSqlite.feedClient.COLUMN_CLIENT_EMAIL, email.getText().toString());
-                values.put(feedSqlite.feedClient.COLUMN_CLIENT_DIRECTION, direction.getText().toString());
-                values.put(feedSqlite.feedClient.COLUMN_CLIENT_PHONE, phone.getText().toString());
+                        sqLiteDatabase.insert(feedSqlite.feedClient.TABLE_NAME, null, values);
 
-                sqLiteDatabase.insert(feedSqlite.feedClient.TABLE_NAME, null, values);
+                    }catch (SQLiteException e){
+                        Log.e(getClass().getName(), e.toString());
+                    }finally {
+                        sqLiteDatabase.close();
+                    }
 
-            }catch (SQLiteException e){
-                Log.e(getClass().getName(), e.toString());
-            }finally {
-                sqLiteDatabase.close();
-            }
+                    Log.e(getClass().getName(), "save clicked ok");
+                    finish();
 
-            Log.e(getClass().getName(), "save clicked ok");
-            finish();
-
-        }else{
-            AlertDialog alertDialog = new AlertDialog.Builder(new_client.this).create();
-            alertDialog.setTitle("new client");
-            alertDialog.setMessage("text field is empty");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                }else{
+                    AlertDialog alertDialog = new AlertDialog.Builder(new_client.this).create();
+                    alertDialog.setTitle("new client");
+                    alertDialog.setMessage("text field is empty");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialog.show();
+                    Log.e(getClass().getName(), "clicked empty");
                 }
-            });
-            alertDialog.show();
-            Log.e(getClass().getName(), "clicked empty");
-        }
+            }
+        }).start();
+
     }
 
 

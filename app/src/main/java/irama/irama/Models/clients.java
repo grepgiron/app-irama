@@ -9,6 +9,7 @@ public class clients {
     private String _id;
     private String code;
     private String name;
+    private String phone;
     private String rtn;
     private int isActive;
     public int isSync;

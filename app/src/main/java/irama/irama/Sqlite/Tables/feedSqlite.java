@@ -59,6 +59,7 @@ public final class feedSqlite {
                         COLUMN_CLIENT_NAME + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_RTN + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_CODE + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_CLIENT_PHONE + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_EMAIL + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_DIRECTION + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_ACTIVE + BOOLEAN_TYPE + COMMA_SEP +
@@ -71,6 +72,7 @@ public final class feedSqlite {
                 "SELECT " + _ID + COMMA_SEP +
                         feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
                         feedClient.COLUMN_CLIENT_RTN + COMMA_SEP +
+                        feedClient.COLUMN_CLIENT_PHONE + COMMA_SEP +
                         feedClient.COLUMN_CLIENT_CODE + COMMA_SEP +
                         feedClient.COLUMN_CLIENT_ACTIVE +
                         " FROM " + feedClient.TABLE_NAME;

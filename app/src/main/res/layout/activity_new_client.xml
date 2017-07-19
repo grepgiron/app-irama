@@ -48,13 +48,15 @@
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="client" />
+                        android:text="client"
+                        android:textAlignment="textEnd" />
 
                     <EditText
                         android:id="@+id/nc_name"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="36dp" />
+                        android:layout_marginLeft="36dp"
+                        android:selectAllOnFocus="true" />
                 </TableRow>
 
                 <TableRow>
@@ -62,7 +64,8 @@
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="rtn" />
+                        android:text="rtn"
+                        android:textAlignment="textEnd" />
 
                     <EditText
                         android:id="@+id/nc_rtn"
@@ -76,7 +79,8 @@
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="phone" />
+                        android:text="phone"
+                        android:textAlignment="textEnd" />
 
                     <EditText
                         android:id="@+id/nc_phone"
@@ -90,7 +94,8 @@
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="email" />
+                        android:text="email"
+                        android:textAlignment="textEnd" />
 
                     <EditText
                         android:id="@+id/nc_emails"
@@ -104,7 +109,8 @@
                     <TextView
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="direction" />
+                        android:text="direction"
+                        android:textAlignment="textEnd" />
 
                     <EditText
                         android:id="@+id/nc_direction"
@@ -127,23 +133,23 @@
                 android:id="@+id/nc_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:layout_marginStart="26dp"
-                android:layout_toRightOf="@+id/nc_cancel"
+                android:layout_marginLeft="30dp"
                 android:text="save"
                 android:textColor="@color/white"
-                android:theme="@style/MyButton" />
+                android:theme="@style/MyButton"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/nc_cancel" />
 
             <Button
                 android:id="@+id/nc_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="59dp"
-                android:layout_marginStart="59dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginStart="88dp"
                 android:text="cancel"
                 android:textColor="@color/white"
                 android:theme="@style/MyButton"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
 
 

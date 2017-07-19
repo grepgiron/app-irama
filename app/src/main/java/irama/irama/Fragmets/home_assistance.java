@@ -37,6 +37,7 @@ public class home_assistance extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), new_client.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -45,6 +46,7 @@ public class home_assistance extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), new_order.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
