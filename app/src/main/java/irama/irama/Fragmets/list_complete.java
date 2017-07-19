@@ -50,37 +50,46 @@ public class list_complete extends Fragment {
         final View vw = inflater.inflate(R.layout.fragment_listcomplete, container, false);
         initComponents(vw);
 
+
         new Thread(new Runnable() {
+
             @Override
             public void run() {
-                try {
-                    db = dbHelper.getWritableDatabase();
-                    Cursor c = db.rawQuery(feedSqlite.feedOrder.QUERY_COMPLETE_ORDER, null);
-                    if (c != null) {
-                        if (c.moveToFirst()) {
-                            do {
-                                if(c.getInt(2) == 1) {
-                                    parameters = new parameters(c.getString(0).toString(),
-                                            c.getString(1).toString(),"  "," ", c.getInt(2));
-                                    Log.e("List_Pending", "get values " + c.getInt(2));
-                                    Log.e("List_Pending", "Insert " + c.getString(0));
-                                    arrayOfOrders.add(parameters);
+                list_complete.this.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            db = dbHelper.getWritableDatabase();
+                            Cursor c = db.rawQuery(feedSqlite.feedOrder.QUERY_COMPLETE_ORDER, null);
+                            if (c != null) {
+                                if (c.moveToFirst()) {
+                                    do {
+                                        if(c.getInt(2) == 1) {
+                                            parameters = new parameters(c.getString(0).toString(),
+                                                    c.getString(1).toString(),"  "," ", c.getInt(2));
+                                            Log.e("List_Pending", "get values " + c.getInt(2));
+                                            Log.e("List_Pending", "Insert " + c.getString(0));
+                                            arrayOfOrders.add(parameters);
+                                        }
+                                    } while (c.moveToNext());
                                 }
-                            } while (c.moveToNext());
+                            }
+                        } catch (SQLiteException e) {
+                            Log.e(getClass().getSimpleName(), "Error database");
+                        } finally {
+                            if (db != null) {
+                                db.close();
+                            }
                         }
+                        listView.setHasFixedSize(true);
+                        listView.setLayoutManager(layoutManager);
+                        recyclerAdapter = new HolderAdapter(arrayOfOrders, vw.getContext());
+                        listView.setAdapter(recyclerAdapter);
+                        //ordersAdapter = new OrdersAdapter(getContext(), arrayOfOrders);
                     }
-                } catch (SQLiteException e) {
-                    Log.e(getClass().getSimpleName(), "Error database");
-                } finally {
-                    if (db != null) {
-                        db.close();
-                    }
-                }
-                listView.setHasFixedSize(true);
-                listView.setLayoutManager(layoutManager);
-                recyclerAdapter = new HolderAdapter(arrayOfOrders, vw.getContext());
-                listView.setAdapter(recyclerAdapter);
-                //ordersAdapter = new OrdersAdapter(getContext(), arrayOfOrders);
+                });
+
 
             }
         }).start();

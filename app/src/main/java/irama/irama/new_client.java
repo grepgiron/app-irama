@@ -42,6 +42,8 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_client);
         setSupportActionBar(toolbar);
 
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initComponents();
@@ -99,6 +101,7 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
             }
 
             Log.e(getClass().getName(), "save clicked ok");
+            finish();
 
         }else{
             AlertDialog alertDialog = new AlertDialog.Builder(new_client.this).create();
