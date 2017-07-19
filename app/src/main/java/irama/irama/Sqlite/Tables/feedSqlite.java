@@ -43,6 +43,7 @@ public final class feedSqlite {
         public static final String COLUMN_CLIENT_NAME = "name";
         public static final String COLUMN_CLIENT_RTN = "rtn";
         public static final String COLUMN_CLIENT_EMAIL = "email";
+        public static final String COLUMN_CLIENT_PHONE = "phone";
         public static final String COLUMN_CLIENT_DIRECTION = "direction";
         public static final String COLUMN_CLIENT_ACTIVE = "active";
         public static final String COLUMN_CLIENT_SYNC = "clientSync";

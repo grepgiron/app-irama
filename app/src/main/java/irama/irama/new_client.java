@@ -91,6 +91,7 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
                 values.put(feedSqlite.feedClient.COLUMN_CLIENT_RTN, rtn.getText().toString());
                 values.put(feedSqlite.feedClient.COLUMN_CLIENT_EMAIL, email.getText().toString());
                 values.put(feedSqlite.feedClient.COLUMN_CLIENT_DIRECTION, direction.getText().toString());
+                values.put(feedSqlite.feedClient.COLUMN_CLIENT_PHONE, phone.getText().toString());
 
                 sqLiteDatabase.insert(feedSqlite.feedClient.TABLE_NAME, null, values);
 
