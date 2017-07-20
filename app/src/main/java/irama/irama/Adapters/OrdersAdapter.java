@@ -22,11 +22,17 @@ import irama.irama.R;
  * Created by enagi on 28/6/2017.
  */
 
-public class OrdersAdapter extends ArrayAdapter<parameters> {
+public class OrdersAdapter extends ArrayAdapter<parameters>{
+
+    private TextView tvClient, tvDescription;
+    private Button buttonEdit, buttonSync;
+    private CheckBox checkBox;
+    private ArrayList<parameters> parameterses;
 
 
     public OrdersAdapter(Context context, ArrayList<parameters> parameterses){
         super(context, 0, parameterses);
+
     }
 
     @NonNull
@@ -40,11 +46,11 @@ public class OrdersAdapter extends ArrayAdapter<parameters> {
         TextView tvClient = (TextView) convertView.findViewById(R.id.client_item_list);
         TextView tvDescription = (TextView)convertView.findViewById(R.id.description_item_list);
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.check_state);
-        Button buttonEdit = (Button) convertView.findViewById(R.id.item_edit);
-        Button buttonSync = (Button) convertView.findViewById(R.id.item_sync);
 
         tvClient.setText(parameters.getName());
         tvDescription.setText(parameters.getDescription());
+
+
 
         if(parameters.getIsSync() == 1){
             checkBox.setChecked(true);
@@ -53,5 +59,4 @@ public class OrdersAdapter extends ArrayAdapter<parameters> {
 
         return convertView;
     }
-
 }

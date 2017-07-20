@@ -30,7 +30,7 @@ import static android.content.ContentValues.TAG;
  * Created by enagi on 1/7/2017.
  */
 
-public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder> {
+public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder> implements View.OnClickListener{
 
     private ArrayList<parameters> parameterses;
     private Context context;
@@ -81,6 +81,11 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
         return (null != parameterses ? parameterses.size() : 0);
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
@@ -104,6 +109,8 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
             this.tvDescription = (TextView)itemView.findViewById(R.id.description_item_list);
             this.sync = (Button)itemView.findViewById(R.id.item_sync);
             this.edit = (Button)itemView.findViewById(R.id.item_edit);
+            this.edit.setFocusable(true);
+            this.sync.setFocusable(true);
             this.checkBox = (CheckBox)itemView.findViewById(R.id.check_state);
             this.textView = (TextView)itemView.findViewById(R.id.date_order);
             if (isViewExpanded == false) {
@@ -111,6 +118,20 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
                 someView.setVisibility(View.GONE);
                 someView.setEnabled(false);
             }
+
+            this.edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                     Log.e(getClass().getName(), "edit this " + parameterses.get(getAdapterPosition()).getName());
+                }
+            });
+            this.sync.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e(getClass().getName(), "sync this " + parameterses.get(getAdapterPosition()).getName());
+
+                }
+            });
         }
 
         @Override

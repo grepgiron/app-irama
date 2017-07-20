@@ -41,7 +41,6 @@ public class list_complete extends Fragment {
     private parameters parameters;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
-    private OrdersAdapter ordersAdapter;
     private RecyclerView listView;
 
     @Nullable

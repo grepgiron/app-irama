@@ -82,8 +82,8 @@ public class new_order extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerAdapter = new ClientsAdapter(arrayOfClients, getBaseContext());
-        recyclerView.setAdapter(recyclerAdapter);
+        clientsAdapter = new ClientsAdapter(arrayOfClients, getBaseContext());
+        recyclerView.setAdapter(clientsAdapter);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
