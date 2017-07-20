@@ -69,29 +69,26 @@
             >
 
                 <Button
-                    android:id="@+id/sync_order"
+                    android:id="@+id/item_sync"
                     android:layout_width="80dp"
                     android:layout_height="40dp"
-                    android:textIsSelectable="true"
-                    android:text="Sync"
+                    android:text="sync"
                     android:textColor="@color/white"
                     android:clickable="true"
                     android:background="@color/colorAccent"
                     android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/edit_order"
-                    android:layout_toStartOf="@+id/edit_order" />
+                    android:layout_toStartOf="@+id/item_edit" />
                 <Button
                     android:layout_width="80dp"
                     android:layout_height="40dp"
-                    android:textIsSelectable="true"
-                    android:text="Editar"
+                    android:text="edit"
+                    android:background="@drawable/circle_button"
                     android:clickable="true"
-                    android:background="@color/lbl_name"
                     android:textColor="@color/white"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:id="@+id/edit_order" />
+                    android:id="@+id/item_edit" />
 
         </RelativeLayout>
 

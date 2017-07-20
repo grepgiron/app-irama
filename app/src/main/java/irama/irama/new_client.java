@@ -81,9 +81,7 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
     }
 
     private void insertClient(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+
                 if(!TextUtils.isEmpty(name.getText().toString()) || !TextUtils.isEmpty(rtn.getText().toString())){
                     try {
                         sqLiteDatabase = dbHelper.getWritableDatabase();
@@ -119,9 +117,6 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
                     alertDialog.show();
                     Log.e(getClass().getName(), "clicked empty");
                 }
-            }
-        }).start();
-
     }
 
 

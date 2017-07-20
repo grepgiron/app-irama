@@ -102,8 +102,8 @@ public class HolderAdapter extends RecyclerView.Adapter<HolderAdapter.ViewHolder
             this.someView = itemView.findViewById(R.id.new_oo);
             this.tvClient = (TextView)itemView.findViewById(R.id.client_item_list);
             this.tvDescription = (TextView)itemView.findViewById(R.id.description_item_list);
-            this.sync = (Button)itemView.findViewById(R.id.sync_order);
-            this.edit = (Button)itemView.findViewById(R.id.edit_order);
+            this.sync = (Button)itemView.findViewById(R.id.item_sync);
+            this.edit = (Button)itemView.findViewById(R.id.item_edit);
             this.checkBox = (CheckBox)itemView.findViewById(R.id.check_state);
             this.textView = (TextView)itemView.findViewById(R.id.date_order);
             if (isViewExpanded == false) {
