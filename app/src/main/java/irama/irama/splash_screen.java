@@ -1,9 +1,12 @@
 package irama.irama;
 
 import android.animation.ObjectAnimator;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +31,7 @@ import irama.irama.Sqlite.DBHelper;
 
 public class splash_screen extends AppCompatActivity {
 
+    private SharedPreferences sharedPreferences;
     private ProgressBar progressBar;
     private Animation animation;
     private TextView textView;
@@ -50,11 +54,11 @@ public class splash_screen extends AppCompatActivity {
         animator.setDuration(4000);
         animator.setInterpolator(new DecelerateInterpolator());
         animator.start();
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                createDB();
                 getData();
             }
         },5000);
@@ -65,14 +69,21 @@ public class splash_screen extends AppCompatActivity {
         dbHelper = new DBHelper(splash_screen.this);
         db = dbHelper.getWritableDatabase();
         values = new ContentValues();
+
         progressBar = (ProgressBar)findViewById(R.id.progress_bar);
-        animation = AnimationUtils.loadAnimation(splash_screen.this, R.anim.anim_download);
         textView = (TextView)findViewById(R.id.text2a);
+
+        animation = AnimationUtils.loadAnimation(splash_screen.this, R.anim.anim_download);
         in = AnimationUtils.loadAnimation(splash_screen.this, R.anim.open_animation);
         animator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100);
+
+        Log.e(getClass().getName(), "initComponents");
+
+
     }
 
     private void getData(){
+        Log.e(getClass().getName(), "getData");
         new getClients().execute();
 
     }
@@ -104,5 +115,32 @@ public class splash_screen extends AppCompatActivity {
 
     }
 
+    private void createDB(){
+        if(sharedPreferences.getBoolean("database_created", true)){
+            Log.e(getClass().getName(), "createDatabase");
+            try {
+                dbHelper.getWritableDatabase();
+                Log.e("Database", "created");
+                final ProgressDialog progress = new ProgressDialog(this);
+                progress.setTitle("Database");
+                progress.setMessage("Please wait while the database is created...");
+                progress.show();
 
+                Runnable progressRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.cancel();
+                    }
+                };
+
+                Handler pdCanceller = new Handler();
+                pdCanceller.postDelayed(progressRunnable, 3000);
+
+
+            }catch (SQLiteException e){
+                Log.d("SQLite", e.toString());
+            }
+            sharedPreferences.edit().putBoolean("database_created", false).commit();
+        }
+    }
 }

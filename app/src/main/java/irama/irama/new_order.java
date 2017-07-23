@@ -12,8 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -39,7 +42,7 @@ public class new_order extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
     private RecyclerView recyclerView;
-    private SearchView searchView;
+    private EditText searchView;
 
 
     @Override
@@ -56,6 +59,78 @@ public class new_order extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        getAdapter();
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        clientsAdapter = new ClientsAdapter(arrayOfClients, getBaseContext());
+        recyclerView.setAdapter(clientsAdapter);
+
+        searchClient();
+    }
+
+    void initComponents(){
+        dbHelper = new DBHelper(this);
+        arrayOfClients = new ArrayList<clients>();
+        recyclerView = (RecyclerView)findViewById(R.id.client_recycler);
+        searchView = (EditText)findViewById(R.id.search_client);
+        Log.e(getClass().getName(), "initComponents");
+
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
+
+    private void searchClient() {
+
+        searchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                s = s.toString().toLowerCase();
+                final ArrayList<clients> filteredClients = new ArrayList<clients>();
+
+                for (int i = 0; i < arrayOfClients.size(); i++) {
+                    final clients client = arrayOfClients.get(i);
+                    if (client.getName().equals(s) || client.getRtn().contains(s)) {
+                        filteredClients.add(arrayOfClients.get(i));
+                    }
+                }
+
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(layoutManager);
+                clientsAdapter = new ClientsAdapter(filteredClients, getBaseContext());
+                recyclerView.setAdapter(clientsAdapter);
+                try {
+                    recyclerAdapter.notifyDataSetChanged();
+
+                } catch (Exception e) {
+                    Log.e(getClass().getName(), " Error" + e.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+    }
+
+    private void getAdapter(){
         try {
             Thread.sleep(200);
             sqLiteDatabase = dbHelper.getWritableDatabase();
@@ -79,50 +154,8 @@ public class new_order extends AppCompatActivity {
                 sqLiteDatabase.close();
             }
         }
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        clientsAdapter = new ClientsAdapter(arrayOfClients, getBaseContext());
-        recyclerView.setAdapter(clientsAdapter);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                try {
-                    clientsAdapter.getFilter().filter(newText);
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                return false;
-            }
-        });
+        Log.e(getClass().getName(), "getAdapter");
 
     }
 
-    void initComponents(){
-        dbHelper = new DBHelper(this);
-        arrayOfClients = new ArrayList<clients>();
-        recyclerView = (RecyclerView)findViewById(R.id.client_recycler);
-        searchView = (SearchView)findViewById(R.id.search_client);
-
-    }
-
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return super.onSupportNavigateUp();
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
-    }
 }

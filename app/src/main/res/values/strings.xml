@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">irama</string>
+    <string name="client_search">Cliente</string>
+    <string name="client_searchHint">Buscar</string>
 </resources>

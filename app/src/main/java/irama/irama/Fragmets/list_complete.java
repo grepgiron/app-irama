@@ -67,8 +67,6 @@ public class list_complete extends Fragment {
                                         if(c.getInt(2) == 1) {
                                             parameters = new parameters(c.getString(0).toString(),
                                                     c.getString(1).toString(),"  "," ", c.getInt(2));
-                                            Log.e("List_Pending", "get values " + c.getInt(2));
-                                            Log.e("List_Pending", "Insert " + c.getString(0));
                                             arrayOfOrders.add(parameters);
                                         }
                                     } while (c.moveToNext());
@@ -85,21 +83,12 @@ public class list_complete extends Fragment {
                         listView.setLayoutManager(layoutManager);
                         recyclerAdapter = new HolderAdapter(arrayOfOrders, vw.getContext());
                         listView.setAdapter(recyclerAdapter);
-                        //ordersAdapter = new OrdersAdapter(getContext(), arrayOfOrders);
                     }
                 });
 
 
             }
         }).start();
-
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CheckBox checkBox = (CheckBox) v;
-                Toast.makeText(v.getContext(), "presed", Toast.LENGTH_SHORT);
-            }
-        };
 
         return vw;
     }

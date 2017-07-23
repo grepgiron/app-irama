@@ -89,6 +89,15 @@
                 app:cb_pressedRingWidth="4dip"
                 android:elevation="8dp"
                 app:cb_color="#8a1eb1"/>
+            <at.markushi.ui.CircleButton
+                android:id="@+id/assistance_get_clients"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_people"
+                app:cb_pressedRingWidth="4dip"
+                android:elevation="8dp"
+                app:cb_color="#d4de1f"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -107,6 +116,13 @@
                 android:layout_marginLeft="16dp"
                 android:textAlignment="center"
                 android:text="sync clients"/>
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textAlignment="center"
+                android:text="get clients"/>
 
         </LinearLayout>
 

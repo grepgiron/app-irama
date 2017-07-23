@@ -64,8 +64,6 @@ public class list_pending extends Fragment{
                                 if(c.getInt(2) == 0) {
                                     parameters = new parameters(c.getString(0).toString(),
                                             c.getString(1).toString(),"","", c.getInt(2));
-                                    Log.e("List_Pending", "get values " + c.getInt(2));
-                                    Log.e("List_Pending", "Insert " + c.getString(0));
                                     arrayOfOrders.add(parameters);
                                 }
                             }while (c.moveToNext());

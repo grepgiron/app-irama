@@ -93,9 +93,8 @@ public class home_activity extends AppCompatActivity{
     }
 
     private void initComponents(){
+
     }
-
-
 
     private void initViewPager(ViewPager viewPager){
 

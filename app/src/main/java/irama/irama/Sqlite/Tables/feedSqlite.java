@@ -184,4 +184,36 @@ public final class feedSqlite {
 
     }
 
+    public static final class feedOrderCategory implements BaseColumns{
+
+        public static final String TABLE_NAME = "ordersCategory";
+        public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_CODE = "code";
+        public static final String COLUMN_ORDER_CATEGORY_ID = "categoryId";
+
+        private static final String TEXT_TYPE = " TEXT";
+        private static final String INTEGER_TYPE = " INTEGER";
+        private static final String COMMA_SEP = ",";
+
+
+        public static final String SQL_CREATE_TABLE =
+                "CREATE " + TABLE_NAME + " (" + _ID + " INTEGER PRIMARY KEY," +
+                        COLUMN_NAME + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_CODE + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_ORDER_CATEGORY_ID + TEXT_TYPE + " )";
+
+        public static final String SQL_DROP_TABLE =
+                "DROP TABLE IF EXISTS " + TABLE_NAME;
+
+
+        public static final String QUERY_GET_CATEGORY =
+                "SELECT * FROM " + TABLE_NAME;
+
+
+
+
+    }
+
 }
