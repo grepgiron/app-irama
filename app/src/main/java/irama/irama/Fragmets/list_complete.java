@@ -6,23 +6,17 @@ import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import irama.irama.Adapters.HolderAdapter;
-import irama.irama.Adapters.OrdersAdapter;
-import irama.irama.Models.order;
 import irama.irama.Models.parameters;
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
@@ -47,8 +41,8 @@ public class list_complete extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         final View vw = inflater.inflate(R.layout.fragment_listcomplete, container, false);
-        initComponents(vw);
 
+        initComponents(vw);
 
         new Thread(new Runnable() {
 
@@ -58,7 +52,6 @@ public class list_complete extends Fragment {
                     @Override
                     public void run() {
                         try {
-
                             db = dbHelper.getWritableDatabase();
                             Cursor c = db.rawQuery(feedSqlite.feedOrder.QUERY_COMPLETE_ORDER, null);
                             if (c != null) {
@@ -72,8 +65,10 @@ public class list_complete extends Fragment {
                                     } while (c.moveToNext());
                                 }
                             }
+                            Log.e(getClass().getName(), "getOrders");
+
                         } catch (SQLiteException e) {
-                            Log.e(getClass().getSimpleName(), "Error database");
+                            Log.e(getClass().getSimpleName(), "error getOrders: " + e);
                         } finally {
                             if (db != null) {
                                 db.close();
@@ -94,11 +89,18 @@ public class list_complete extends Fragment {
     }
 
     private void initComponents(View view) {
-        dbHelper = new DBHelper(view.getContext());
-        arrayOfOrders = new ArrayList<parameters>();
-        listView = (RecyclerView) view.findViewById(R.id.complete_recyclerView);
-        checkBox = (CheckBox) view.findViewById(R.id.check_state);
-        layoutManager = new LinearLayoutManager(view.getContext());
-    }
+        try {
 
+            dbHelper = new DBHelper(view.getContext());
+            arrayOfOrders = new ArrayList<parameters>();
+            listView = (RecyclerView) view.findViewById(R.id.complete_recyclerView);
+            checkBox = (CheckBox) view.findViewById(R.id.check_state);
+            layoutManager = new LinearLayoutManager(view.getContext());
+
+            Log.e(getClass().getName(), "initComponents");
+
+        }catch (Exception e){
+            Log.e(getClass().getName(), "error initComponents: " + e);
+        }
+    }
 }

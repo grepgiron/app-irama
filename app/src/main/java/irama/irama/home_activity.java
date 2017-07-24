@@ -1,7 +1,11 @@
 package irama.irama;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -14,6 +18,7 @@ import android.view.View;
 import at.markushi.ui.CircleButton;
 import irama.irama.Adapters.ViewPagerAdapter;
 import irama.irama.Fragmets.*;
+import irama.irama.Sqlite.DBHelper;
 
 
 /**
@@ -28,17 +33,17 @@ public class home_activity extends AppCompatActivity{
     private home_assistance homeAssistance;
     private ViewPager viewPager;
     private MenuItem menuItem;
+    private SharedPreferences sharedPreferences;
+    private DBHelper dbHelper;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
 
-        initComponents();
-
         viewPager = (ViewPager) findViewById(R.id.view_pager_home);
-
-
 
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation_bottom);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -90,22 +95,54 @@ public class home_activity extends AppCompatActivity{
         });
 
         initViewPager(viewPager);
+
+        if(sharedPreferences.getBoolean("database_created", true)){
+
+            try {
+                dbHelper.getWritableDatabase();
+                Log.e("Database", "created");
+                final ProgressDialog progress = new ProgressDialog(this);
+                progress.setTitle("Database");
+                progress.setMessage("Please wait while the database is created...");
+                progress.show();
+
+                Runnable progressRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.cancel();
+                    }
+                };
+
+                Handler pdCanceller = new Handler();
+                pdCanceller.postDelayed(progressRunnable, 3000);
+
+
+            }catch (SQLiteException e){
+                Log.d("SQLite", e.toString());
+            }
+            sharedPreferences.edit().putBoolean("database_created", false).commit();
+        }
     }
 
-    private void initComponents(){
+    private void initViewPager(ViewPager viewPager) {
+        try {
+            dbHelper = new DBHelper(this);
+            sharedPreferences = getSharedPreferences("FirstTime",0);
 
-    }
+            listComplete = new list_complete();
+            listPending = new list_pending();
+            homeAssistance = new home_assistance();
 
-    private void initViewPager(ViewPager viewPager){
+            ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+            viewPagerAdapter.addFragment(homeAssistance);
+            viewPagerAdapter.addFragment(listPending);
+            viewPagerAdapter.addFragment(listComplete);
+            viewPager.setAdapter(viewPagerAdapter);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        listComplete = new list_complete();
-        listPending = new list_pending();
-        homeAssistance = new home_assistance();
-        viewPagerAdapter.addFragment(homeAssistance);
-        viewPagerAdapter.addFragment(listPending);
-        viewPagerAdapter.addFragment(listComplete);
-        viewPager.setAdapter(viewPagerAdapter);
+            Log.e(getClass().getName(), "initViewPager");
+        }catch (Exception e){
+            Log.e(getClass().getName(), "error initViewPager: " + e);
+        }
     }
 
 }

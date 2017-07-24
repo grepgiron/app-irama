@@ -21,9 +21,25 @@ import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.ExecutionException;
+
+import irama.irama.Controllers.AppController;
+import irama.irama.Controllers.getData;
 import irama.irama.Sqlite.DBHelper;
+import irama.irama.Sqlite.Tables.feedSqlite;
 
 /**
  * Created by enagi on 5/7/2017.
@@ -40,7 +56,10 @@ public class splash_screen extends AppCompatActivity {
     private SQLiteDatabase db;
     private DBHelper dbHelper;
     private ContentValues values;
+    private SQLiteDatabase sqLiteDatabase;
     private Animation in;
+    private getData getData;
+    private String json= "";
 
 
     @Override
@@ -49,8 +68,12 @@ public class splash_screen extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
 
         initComponents();
-
-        textView.setAnimation(animation);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+            }
+        });
+        /*textView.setAnimation(animation);
         animator.setDuration(4000);
         animator.setInterpolator(new DecelerateInterpolator());
         animator.start();
@@ -61,25 +84,27 @@ public class splash_screen extends AppCompatActivity {
                 createDB();
                 getData();
             }
-        },5000);
+        },5000);*/
     }
 
     private void initComponents(){
 
-        dbHelper = new DBHelper(splash_screen.this);
-        db = dbHelper.getWritableDatabase();
-        values = new ContentValues();
+        try {
+            dbHelper = new DBHelper(splash_screen.this);
+            values = new ContentValues();
 
-        progressBar = (ProgressBar)findViewById(R.id.progress_bar);
-        textView = (TextView)findViewById(R.id.text2a);
+           /* progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+            textView = (TextView) findViewById(R.id.text2a);
 
-        animation = AnimationUtils.loadAnimation(splash_screen.this, R.anim.anim_download);
-        in = AnimationUtils.loadAnimation(splash_screen.this, R.anim.open_animation);
-        animator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100);
+            animation = AnimationUtils.loadAnimation(splash_screen.this, R.anim.anim_download);
+            in = AnimationUtils.loadAnimation(splash_screen.this, R.anim.open_animation);
+            animator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100);
 
-        Log.e(getClass().getName(), "initComponents");
+            Log.e(getClass().getName(), "initComponents");*/
 
-
+        }catch (Exception e){
+            Log.e(getClass().getName(), "error: " +e);
+        }
     }
 
     private void getData(){
@@ -143,4 +168,64 @@ public class splash_screen extends AppCompatActivity {
             sharedPreferences.edit().putBoolean("database_created", false).commit();
         }
     }
+
+    /*private void requestClients(){
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray array = null;
+                values = new ContentValues();
+
+                try {
+                    sqLiteDatabase = dbHelper.getWritableDatabase();
+
+                    array = response.getJSONArray("content");
+                    for(int i = 0; i < array.length(); i++){
+                        JSONObject client = (JSONObject)array.get(i);
+
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_ID, client.getString("_id"));
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_NAME, client.getString("name"));
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_CODE, client.getString("code"));
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_RTN, client.getString("rtn"));
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_EMAIL, client.getString("email"));
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_DIRECTION, client.getString("address"));
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_PHONE, client.getString("phone"));
+                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_SYNC, 1);
+
+                        sqLiteDatabase.insert(feedSqlite.feedClient.TABLE_NAME, null, values);
+
+                        *//*String id = client.getString("_id");
+                        String code = client.getString("code");
+                        String name = client.getString("name");
+                        String rtn = client.getString("rtn");
+                        String email = client.getString("email");
+                        String address = client.getString("address");
+                        String phone = client.getString("phone");
+
+                        json += "_id: " + id + "\n";
+                        json += "_code: " + code + "\n";
+                        json += "_name: " + name + "\n";
+                        json += "_rtn: " + rtn + "\n";
+                        json += "_email: " + email + "\n";
+                        json += "_address: " + address + "\n";
+                        json += "_phone: " + phone + "\n\n";*//*
+                    }
+
+                }catch (SQLiteException e){
+                    Log.e(getClass().getSimpleName(), e.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.e(getClass().getSimpleName(), json);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(getClass().getSimpleName(), error.toString());
+            }
+        });
+        AppController.getInstance().addToRequestQueue(req);
+    }*/
 }

@@ -29,9 +29,7 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         initComponents();
-
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,25 +40,29 @@ public class login extends AppCompatActivity {
     }
 
     private void initComponents(){
-
-        dbHelper = new DBHelper(login.this);
-        db = dbHelper.getWritableDatabase();
-        tvUser = (TextView)findViewById(R.id.eT_user);
-        tvPass = (TextView)findViewById(R.id.eT_pass);
-        btLogin = (Button)findViewById(R.id.login_button);
-
+        try {
+            dbHelper = new DBHelper(login.this);
+            db = dbHelper.getWritableDatabase();
+            tvUser = (TextView) findViewById(R.id.eT_user);
+            tvPass = (TextView) findViewById(R.id.eT_pass);
+            btLogin = (Button) findViewById(R.id.login_button);
+        }catch (Exception e ){
+            Log.e(getClass().getName(), "error initComponents: " + e);
+        }
     }
 
     private void login(){
+        try {
+            Cursor c = db.rawQuery(feedSqlite.feedUser.SQL_LOGIN, new String[]{tvUser.getText().toString(), tvPass.getText().toString()});
 
-        Cursor c = db.rawQuery(feedSqlite.feedUser.SQL_LOGIN, new String[] { tvUser.getText().toString(), tvPass.getText().toString()});
+            if (c.getCount() > 0) {
 
-        if(c.getCount()>0){
-
-            Log.d("cursor", String.valueOf(c.getCount()));
-            Intent intent = new Intent(login.this, splash_screen.class);
-            startActivity(intent);
+                Log.d("cursor", String.valueOf(c.getCount()));
+                Intent intent = new Intent(login.this, splash_screen.class);
+                startActivity(intent);
+            }
+        }catch (Exception e ){
+            Log.e(getClass().getName(), "error login: " + e);
         }
-
     }
 }

@@ -2,124 +2,52 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:layout_marginTop="16dp">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <LinearLayout
         android:orientation="vertical"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         >
 
-
-        <TextView
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="detail order"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            android:paddingLeft="16dp"
-            />
-
-        <TableLayout
-            android:layout_width="match_parent"
-android:gravity="center"            android:layout_height="wrap_content"
-            >
-
-            <TableRow
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:textAlignment="textEnd"
-                    android:layout_height="wrap_content"
-                    android:text="client" />
-
-                <EditText
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="36dp" />
-            </TableRow>
-
-            <TableRow
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:textAlignment="textEnd"
-                    android:layout_height="wrap_content"
-                    android:text="employee" />
-
-                <EditText
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="36dp" />
-            </TableRow>
-            <TableRow
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:textAlignment="textEnd"
-                    android:layout_height="wrap_content"
-                    android:text="date" />
-
-                <EditText
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="36dp" />
-            </TableRow>
-
-            <TableRow
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:textAlignment="textEnd"
-                    android:layout_height="wrap_content"
-                    android:text="category" />
-
-                <Spinner
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="36dp"
-                    />
-            </TableRow>
-
-            <TableRow
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:textAlignment="textEnd"
-                    android:layout_height="wrap_content"
-                    android:text="type" />
-
-                <EditText
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="36dp" />
-            </TableRow>
-
-        </TableLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="detail product"
-            android:layout_marginTop="16dp"
-            android:paddingLeft="16dp" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_order_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="?attr/colorPrimary"
+                android:elevation="6dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </android.support.design.widget.AppBarLayout>
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="detail order"
+                android:paddingLeft="16dp"
+                />
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                >
 
                 <TableRow
                     android:gravity="center">
@@ -128,11 +56,10 @@ android:gravity="center"            android:layout_height="wrap_content"
                         android:layout_width="80dp"
                         android:textAlignment="textEnd"
                         android:layout_height="wrap_content"
-                        android:text="name" />
+                        android:text="client" />
 
                     <EditText
                         android:layout_width="250dp"
-                        android:textAlignment="textEnd"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="36dp" />
                 </TableRow>
@@ -144,7 +71,21 @@ android:gravity="center"            android:layout_height="wrap_content"
                         android:layout_width="80dp"
                         android:textAlignment="textEnd"
                         android:layout_height="wrap_content"
-                        android:text="description" />
+                        android:text="employee" />
+
+                    <EditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="36dp" />
+                </TableRow>
+                <TableRow
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:textAlignment="textEnd"
+                        android:layout_height="wrap_content"
+                        android:text="date" />
 
                     <EditText
                         android:layout_width="250dp"
@@ -172,10 +113,10 @@ android:gravity="center"            android:layout_height="wrap_content"
                     android:gravity="center">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="80dp"
                         android:textAlignment="textEnd"
                         android:layout_height="wrap_content"
-                        android:text="serie" />
+                        android:text="type" />
 
                     <EditText
                         android:layout_width="250dp"
@@ -185,13 +126,99 @@ android:gravity="center"            android:layout_height="wrap_content"
 
             </TableLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="detail product"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:textAlignment="textEnd"
+                            android:layout_height="wrap_content"
+                            android:text="name" />
+
+                        <EditText
+                            android:layout_width="250dp"
+                            android:textAlignment="textEnd"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="36dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:textAlignment="textEnd"
+                            android:layout_height="wrap_content"
+                            android:text="description" />
+
+                        <EditText
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="36dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:textAlignment="textEnd"
+                            android:layout_height="wrap_content"
+                            android:text="category" />
+
+                        <Spinner
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="36dp"
+                            />
+                    </TableRow>
+
+                    <TableRow
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textAlignment="textEnd"
+                            android:layout_height="wrap_content"
+                            android:text="serie" />
+
+                        <EditText
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="36dp" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
+
+
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp">
             <Button
                 android:id="@+id/detail_order_cancel"
                 android:layout_width="wrap_content"
@@ -208,8 +235,8 @@ android:gravity="center"            android:layout_height="wrap_content"
 
         </LinearLayout>
 
-    </LinearLayout>
 
+    </LinearLayout>
 
 
 

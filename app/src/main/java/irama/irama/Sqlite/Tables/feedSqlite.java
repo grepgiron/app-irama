@@ -15,15 +15,19 @@ public final class feedSqlite {
         public static final String TABLE_NAME = "users";
         public static final String COLUMN_USER = "user";
         public static final String COLUMN_PASS = "pass";
+        public static final String COLUMN_TOKEN = "token";
+        public static final String COLUMN_USER_ID = "userId";
 
         private static final String TEXT_TYPE = " TEXT";
         private static final String COMMA_SEP = ",";
 
         public static final String SQL_CREATE_USERS =
                 "CREATE TABLE " + TABLE_NAME + " (" +
-                _ID + " INTEGER PRIMARY KEY," +
-                COLUMN_USER + TEXT_TYPE + COMMA_SEP +
-                COLUMN_PASS + TEXT_TYPE + " )";
+                        _ID + " INTEGER PRIMARY KEY," +
+                        COLUMN_USER + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_PASS + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_TOKEN + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_USER_ID + TEXT_TYPE + " )";
 
         public static final String SQL_LOGIN =
                 "SELECT " + COLUMN_USER + " FROM " + TABLE_NAME + " WHERE "
@@ -82,7 +86,7 @@ public final class feedSqlite {
 
     public static class feedProductCategory implements BaseColumns{
 
-        public static final String TABLE_NAME = "categoryproduct";
+        public static final String TABLE_NAME = "categoryProduct";
         public static final String COLUMN_CATEGORY_ID = "categoryId";
         public static final String COLUMN_CATEGORY_NAME = "name";
         public static final String COLUMN_CATEGORY_DESCRIPTION = "description";
@@ -104,10 +108,10 @@ public final class feedSqlite {
     public static class feedOrderType implements BaseColumns{
 
         public static final String TABLE_NAME = "orderType";
-        public static final String COLUMN_ORDERTYPE_CODE = "code";
-        public static final String COLUMN_ORDERTYPE_NAME = "name";
-        public static final String COLUMN_ORDERTYPE_DESCRIPTION = "description";
-        public static final String COLUMN_ORDERTYPE_ISACTIVE = "isActive";
+        public static final String COLUMN_ORDER_TYPE_CODE = "code";
+        public static final String COLUMN_ORDER_TYPE_NAME = "name";
+        public static final String COLUMN_ORDER_TYPE_DESCRIPTION = "description";
+        public static final String COLUMN_ORDER_TYPE_ISACTIVE = "isActive";
 
         private static final String TEXT_TYPE = " TEXT";
         private static final String COMMA_SEP = ",";
@@ -117,10 +121,10 @@ public final class feedSqlite {
         public static final String SQL_CREATE_ORDERTYPE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY," +
-                        COLUMN_ORDERTYPE_CODE + TEXT_TYPE + COMMA_SEP +
-                        COLUMN_ORDERTYPE_NAME + TEXT_TYPE + COMMA_SEP +
-                        COLUMN_ORDERTYPE_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
-                        COLUMN_ORDERTYPE_ISACTIVE + BOOLEAN_TYPE + " )";
+                        COLUMN_ORDER_TYPE_CODE + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_ORDER_TYPE_NAME + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_ORDER_TYPE_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_ORDER_TYPE_ISACTIVE + BOOLEAN_TYPE + " )";
 
         public static final String SQL_DROP_ORDERTYPE =
                 "DROP IF EXISTS " + TABLE_NAME;
@@ -198,7 +202,7 @@ public final class feedSqlite {
 
 
         public static final String SQL_CREATE_TABLE =
-                "CREATE " + TABLE_NAME + " (" + _ID + " INTEGER PRIMARY KEY," +
+                "CREATE TABLE " + TABLE_NAME + " (" + _ID + " INTEGER PRIMARY KEY," +
                         COLUMN_NAME + TEXT_TYPE + COMMA_SEP +
                         COLUMN_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CODE + TEXT_TYPE + COMMA_SEP +

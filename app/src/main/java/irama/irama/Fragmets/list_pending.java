@@ -69,8 +69,10 @@ public class list_pending extends Fragment{
                             }while (c.moveToNext());
                         }
                     }
+                    Log.e(getClass().getName(), "getOrder");
+
                 }catch (SQLiteException e){
-                    Log.e(getClass().getSimpleName(), "Error database");
+                    Log.e(getClass().getSimpleName(), "error getOrder: " + e);
                 }finally {
                     if(db != null){
                         db.close();
@@ -88,9 +90,13 @@ public class list_pending extends Fragment{
     }
 
     private void initComponents(View view){
-        dbHelper = new DBHelper(view.getContext());
-        arrayOfOrders = new ArrayList<parameters>();
-        listView = (RecyclerView) view.findViewById(R.id.pending_recyclerView);
-        layoutManager = new LinearLayoutManager(view.getContext());
+        try {
+            dbHelper = new DBHelper(view.getContext());
+            arrayOfOrders = new ArrayList<parameters>();
+            listView = (RecyclerView) view.findViewById(R.id.pending_recyclerView);
+            layoutManager = new LinearLayoutManager(view.getContext());
+        }catch (Exception e){
+            Log.e(getClass().getName(), "error initComponents: " + e);
+        }
     }
 }

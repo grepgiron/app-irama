@@ -27,6 +27,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 import irama.irama.Adapters.ClientsAdapter;
+import irama.irama.Controllers.getData;
 import irama.irama.Models.clients;
 import irama.irama.Sqlite.DBHelper;
 import irama.irama.Sqlite.Tables.feedSqlite;
@@ -34,8 +35,6 @@ import irama.irama.Sqlite.Tables.feedSqlite;
 public class new_order extends AppCompatActivity {
 
 
-    private DBHelper dbHelper;
-    private SQLiteDatabase sqLiteDatabase;
     private ArrayList<clients> arrayOfClients;
     private clients clients;
     private ClientsAdapter clientsAdapter;
@@ -43,6 +42,8 @@ public class new_order extends AppCompatActivity {
     private RecyclerView.Adapter recyclerAdapter;
     private RecyclerView recyclerView;
     private EditText searchView;
+
+    private getData getData;
 
 
     @Override
@@ -59,7 +60,7 @@ public class new_order extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getAdapter();
+        arrayOfClients = getData.getClients();
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -70,7 +71,7 @@ public class new_order extends AppCompatActivity {
     }
 
     void initComponents(){
-        dbHelper = new DBHelper(this);
+        getData = new getData(this);
         arrayOfClients = new ArrayList<clients>();
         recyclerView = (RecyclerView)findViewById(R.id.client_recycler);
         searchView = (EditText)findViewById(R.id.search_client);
@@ -106,7 +107,7 @@ public class new_order extends AppCompatActivity {
 
                 for (int i = 0; i < arrayOfClients.size(); i++) {
                     final clients client = arrayOfClients.get(i);
-                    if (client.getName().equals(s) || client.getRtn().contains(s)) {
+                    if (client.getRtn().contains(s)) {
                         filteredClients.add(arrayOfClients.get(i));
                     }
                 }
@@ -127,34 +128,6 @@ public class new_order extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
-
-    }
-
-    private void getAdapter(){
-        try {
-            Thread.sleep(200);
-            sqLiteDatabase = dbHelper.getWritableDatabase();
-            Cursor c = sqLiteDatabase.rawQuery(feedSqlite.feedClient.QUERY_CLIENTS, null);
-            if( c != null){
-                if(c.moveToFirst()){
-                    do{
-                        clients = new clients(c.getString(0), c.getString(1), c.getString(2), c.getString(3), c.getInt(4));
-                        arrayOfClients.add(clients);
-                    }while (c.moveToNext());
-                }
-            }
-
-        }catch (SQLiteException e){
-            e.printStackTrace();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            if(sqLiteDatabase!=null){
-                sqLiteDatabase.close();
-            }
-        }
-        Log.e(getClass().getName(), "getAdapter");
 
     }
 
