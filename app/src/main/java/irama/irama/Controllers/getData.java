@@ -26,8 +26,6 @@ public class getData {
 
     private Context context;
 
-
-
     private ArrayList<order> arrayOfOders;
     private ArrayList<clients> arrayOfClients;
     private ArrayList<parameters> arrayOfParameters;

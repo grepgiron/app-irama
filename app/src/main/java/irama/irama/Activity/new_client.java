@@ -25,6 +25,9 @@ import android.widget.Spinner;
 
 import java.util.regex.Pattern;
 
+import irama.irama.Controllers.NetworkState;
+import irama.irama.Controllers.postData;
+import irama.irama.Models.clients;
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
 import irama.irama.Sqlite.feedSqlite;
@@ -38,9 +41,16 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
     private Spinner spinner_phone, spinner_email;
     private TextInputEditText name, rtn, phone, email, direction;
     private TextInputLayout nameLayout, rtnLayout, phoneLayout, emailLayout, directionLayout;
+
     private DBHelper dbHelper;
     private SQLiteDatabase sqLiteDatabase;
     private ContentValues values;
+
+    private NetworkState networkState;
+    private postData postData;
+
+    private clients client;
+
     String spinnerPhone[] = {"Mobile","Job"};
     String spinnerEmail[] = {"Personal","Job"};
 
@@ -80,6 +90,8 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
             spinner_email = (Spinner)findViewById(R.id.spinner_email);
             //
             dbHelper = new DBHelper(new_client.this);
+            networkState = new NetworkState(this);
+            postData = new postData(this);
 
             Log.e(getClass().getName(), "initComponents");
 
@@ -135,13 +147,31 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
                     values.put(feedSqlite.feedClient.COLUMN_CLIENT_EMAIL, email.getText().toString());
                     values.put(feedSqlite.feedClient.COLUMN_CLIENT_DIRECTION, direction.getText().toString());
                     values.put(feedSqlite.feedClient.COLUMN_CLIENT_PHONE, phone.getText().toString());
-
                     sqLiteDatabase.insert(feedSqlite.feedClient.TABLE_NAME, null, values);
+
 
                 } catch (SQLiteException e) {
                     Log.e(getClass().getName(), e.toString());
                 } finally {
                     sqLiteDatabase.close();
+                }
+
+                if(networkState.statusConnection(this.getBaseContext())){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("Sync new client?").setCancelable(false).setPositiveButton("Yes",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
                 }
 
                 Log.e(getClass().getName(), "save clicked ok");
@@ -231,7 +261,7 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
     private Boolean validateEmail(String emails){
 
         if (!Patterns.EMAIL_ADDRESS.matcher(emails).matches()){
-            emailLayout.setError("Invalidate Phone");
+            emailLayout.setError("Invalidate Email");
             return false;
         }else {
             emailLayout.setError(null);

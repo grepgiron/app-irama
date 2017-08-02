@@ -26,6 +26,8 @@ import java.util.ArrayList;
 
 import at.markushi.ui.CircleButton;
 import irama.irama.Controllers.AppController;
+import irama.irama.Controllers.postData;
+import irama.irama.Models.clients;
 import irama.irama.Models.order;
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
@@ -39,11 +41,13 @@ import irama.irama.Activity.new_order;
 
 public class home_assistance extends Fragment {
 
-    private CircleButton newclient, neworder, syncOrders, syncClients, getClients;
+    private CircleButton newClient, newOrder, syncOrders, syncClients, getClients;
     private SQLiteDatabase db;
     private DBHelper dbHelper;
     private SQLiteDatabase sqLiteDatabase;
     private ArrayList<order> arrayOfOrders;
+
+    private postData postData;
 
     private ContentValues values;
 
@@ -60,7 +64,7 @@ public class home_assistance extends Fragment {
 
         initComponents(view);
 
-        newclient.setOnClickListener(new View.OnClickListener() {
+        newClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e(getClass().getName(), "new client");
@@ -70,7 +74,7 @@ public class home_assistance extends Fragment {
             }
         });
 
-        neworder.setOnClickListener(new View.OnClickListener() {
+        newOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e(getClass().getName(), "new order");
@@ -83,6 +87,7 @@ public class home_assistance extends Fragment {
         syncClients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                postData.postClients();
                 Log.e(getClass().getName(), "sync clients");
             }
         });
@@ -109,11 +114,12 @@ public class home_assistance extends Fragment {
     private void initComponents(View view){
         try {
             dbHelper = new DBHelper(view.getContext());
-            newclient = (CircleButton) view.findViewById(R.id.assistance_client);
-            neworder = (CircleButton) view.findViewById(R.id.assistance_order);
+            newClient = (CircleButton) view.findViewById(R.id.assistance_client);
+            newOrder = (CircleButton) view.findViewById(R.id.assistance_order);
             syncOrders = (CircleButton) view.findViewById(R.id.assistance_sync_orders);
             syncClients = (CircleButton) view.findViewById(R.id.assistance_sync_clients);
             getClients = (CircleButton) view.findViewById(R.id.assistance_get_clients);
+            postData = new postData(view.getContext());
             Log.e(getClass().getName(), "initComponents");
         }catch (Exception e){
             Log.e(getClass().getName(), "error: " + e);
@@ -141,7 +147,7 @@ public class home_assistance extends Fragment {
         return false;
     }
 
-    public void requestClients(){
+    private void requestClients(){
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -151,21 +157,22 @@ public class home_assistance extends Fragment {
 
                 try {
                     sqLiteDatabase = dbHelper.getWritableDatabase();
-
                     array = response.getJSONArray("content");
-                    for(int i = 0; i < array.length(); i++){
-                        JSONObject client = (JSONObject)array.get(i);
 
-                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_ID, client.getString("_id"));
-                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_NAME, client.getString("name"));
-                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_CODE, client.getString("code"));
-                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_RTN, client.getString("rtn"));
-                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_EMAIL, client.getString("email"));
-                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_DIRECTION, client.getString("address"));
-                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_PHONE, client.getString("phone"));
-                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_SYNC, 1);
+                    if(array != null){
+                        for(int i = 0; i < array.length(); i++){
+                            JSONObject client = (JSONObject)array.get(i);
 
-                        sqLiteDatabase.insertWithOnConflict(feedSqlite.feedClient.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_ID, client.getString("_id"));
+                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_NAME, client.getString("name"));
+                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_CODE, client.getString("code"));
+                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_RTN, client.getString("rtn"));
+                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_EMAIL, client.getString("email"));
+                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_DIRECTION, client.getString("address"));
+                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_PHONE, client.getString("phone"));
+                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_SYNC, 1);
+
+                            sqLiteDatabase.insertWithOnConflict(feedSqlite.feedClient.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
                         /*String id = client.getString("_id");
                         String code = client.getString("code");
@@ -182,6 +189,7 @@ public class home_assistance extends Fragment {
                         json += "_email: " + email + "\n";
                         json += "_address: " + address + "\n";
                         json += "_phone: " + phone + "\n\n";*/
+                        }
                     }
 
                 }catch (SQLiteException e){
@@ -198,4 +206,6 @@ public class home_assistance extends Fragment {
         });
         AppController.getInstance().addToRequestQueue(req);
     }
+
+
 }

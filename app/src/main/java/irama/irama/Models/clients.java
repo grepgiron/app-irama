@@ -10,14 +10,24 @@ public class clients {
     private String code;
     private String name;
     private String phone;
+    private String email;
     private String rtn;
+    private String address;
     private int isActive;
     public int isSync;
 
     public clients() {
     }
 
-    public clients(String _id, String name, String rtn, String code,  int isActive) {
+    public clients(String name, String phone, String email, String rtn, String address) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.rtn = rtn;
+        this.address = address;
+    }
+
+    public clients(String _id, String name, String rtn, String code, int isActive) {
         this._id = _id;
         this.code = code;
         this.name = name;
@@ -31,6 +41,8 @@ public class clients {
         this.rtn = rtn;
         this.isActive = isActive;
     }
+
+
 
     public int getIsSync() {
         return isSync;
@@ -78,5 +90,29 @@ public class clients {
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
