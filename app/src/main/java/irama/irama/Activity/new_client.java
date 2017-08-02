@@ -6,17 +6,24 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.util.regex.Pattern;
 
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
@@ -28,12 +35,14 @@ import irama.irama.Sqlite.feedSqlite;
 
 public class new_client extends AppCompatActivity implements View.OnClickListener{
 
-    private Button save;
-    private Button cancel;
-    private EditText name, rtn, phone, email, direction;
+    private Spinner spinner_phone, spinner_email;
+    private TextInputEditText name, rtn, phone, email, direction;
+    private TextInputLayout nameLayout, rtnLayout, phoneLayout, emailLayout, directionLayout;
     private DBHelper dbHelper;
     private SQLiteDatabase sqLiteDatabase;
     private ContentValues values;
+    String spinnerPhone[] = {"Mobile","Job"};
+    String spinnerEmail[] = {"Personal","Job"};
 
 
     @Override
@@ -48,30 +57,53 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initComponents();
-
+        initSpinner();
 
     }
-
 
     private void initComponents(){
         //
         try {
-            //save = (Button) findViewById(R.id.nc_save);
-            //cancel = (Button) findViewById(R.id.nc_cancel);
-            name = (EditText) findViewById(R.id.nc_name);
-            rtn = (EditText) findViewById(R.id.nc_rtn);
-            phone = (EditText) findViewById(R.id.nc_phone);
-            email = (EditText) findViewById(R.id.nc_emails);
-            direction = (EditText) findViewById(R.id.nc_direction);
+            name = (TextInputEditText) findViewById(R.id.nc_name);
+            rtn = (TextInputEditText) findViewById(R.id.nc_rtn);
+            phone = (TextInputEditText) findViewById(R.id.nc_phone);
+            email = (TextInputEditText) findViewById(R.id.nc_emails);
+            direction = (TextInputEditText) findViewById(R.id.nc_direction);
+
+            nameLayout = (TextInputLayout) findViewById(R.id.layout_name);
+            rtnLayout = (TextInputLayout) findViewById(R.id.layout_rtn);
+            phoneLayout = (TextInputLayout) findViewById(R.id.layout_phone);
+            emailLayout = (TextInputLayout) findViewById(R.id.layout_email);
+            directionLayout = (TextInputLayout) findViewById(R.id.layout_address);
+
+            spinner_phone = (Spinner)findViewById(R.id.spinner_phone);
+            spinner_email = (Spinner)findViewById(R.id.spinner_email);
             //
             dbHelper = new DBHelper(new_client.this);
-           // save.setOnClickListener(this);
-           // cancel.setOnClickListener(this);
 
             Log.e(getClass().getName(), "initComponents");
 
         }catch (Exception e){
             Log.e(getClass().getName(), "error initComponents: " + e);
+        }
+    }
+
+    private void initSpinner(){
+        try{
+
+            ArrayAdapter<String> spinnerArrayAdapterPhone = new ArrayAdapter<String>(this,   android.R.layout.simple_list_item_1, spinnerPhone);
+            spinnerArrayAdapterPhone.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+            spinner_phone.setAdapter(spinnerArrayAdapterPhone);
+            spinner_phone.setSelection(0);
+
+            ArrayAdapter<String> spinnerArrayAdapterEmail = new ArrayAdapter<String>(this,   android.R.layout.simple_list_item_1, spinnerEmail);
+            spinnerArrayAdapterEmail.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+            spinner_email.setAdapter(spinnerArrayAdapterEmail);
+            spinner_email.setSelection(0);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -144,7 +176,7 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_menu:
-                insertClient();
+                validateData();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -162,4 +194,60 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
                 break;
         }*/
     }
+
+    private Boolean validateName(String names){
+        Pattern pattern = Pattern.compile("^[a-zA-Z ]+$");
+        if (!pattern.matcher(names).matches()){
+            nameLayout.setError("Invalidate Name");
+            return false;
+        }else {
+            nameLayout.setError(null);
+        }
+        return true;
+    }
+
+    private Boolean validateRTN(String RTN){
+
+        if (RTN.length() < 13){
+            rtnLayout.setError("Invalidate RTN");
+            return false;
+        }else {
+            rtnLayout.setError(null);
+        }
+        return true;
+    }
+
+    private Boolean validatePhone(String phones){
+
+        if (!Patterns.PHONE.matcher(phones).matches()){
+            phoneLayout.setError("Invalidate Phone");
+            return false;
+        }else {
+            phoneLayout.setError(null);
+        }
+        return true;
+    }
+
+    private Boolean validateEmail(String emails){
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(emails).matches()){
+            emailLayout.setError("Invalidate Phone");
+            return false;
+        }else {
+            emailLayout.setError(null);
+        }
+        return true;
+    }
+
+
+    private void validateData(){
+        boolean a = validateName(name.getText().toString());
+        boolean b = validateRTN(rtn.getText().toString());
+        boolean c = validatePhone(phone.getText().toString());
+        boolean d = validateEmail(email.getText().toString());
+        if (a && b && c && d){
+            insertClient();
+        }
+    }
+
 }
