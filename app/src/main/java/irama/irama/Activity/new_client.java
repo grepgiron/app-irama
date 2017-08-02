@@ -1,4 +1,4 @@
-package irama.irama;
+package irama.irama.Activity;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -11,15 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.ArrayList;
-
-import irama.irama.Models.clients;
+import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
-import irama.irama.Sqlite.Tables.feedSqlite;
+import irama.irama.Sqlite.feedSqlite;
 
 /**
  * Created by grego on 16/7/2017.
@@ -38,7 +39,7 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_client);
+        setContentView(R.layout.activity_client);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_client);
         setSupportActionBar(toolbar);
 
@@ -55,8 +56,8 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
     private void initComponents(){
         //
         try {
-            save = (Button) findViewById(R.id.nc_save);
-            cancel = (Button) findViewById(R.id.nc_cancel);
+            //save = (Button) findViewById(R.id.nc_save);
+            //cancel = (Button) findViewById(R.id.nc_cancel);
             name = (EditText) findViewById(R.id.nc_name);
             rtn = (EditText) findViewById(R.id.nc_rtn);
             phone = (EditText) findViewById(R.id.nc_phone);
@@ -64,8 +65,8 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
             direction = (EditText) findViewById(R.id.nc_direction);
             //
             dbHelper = new DBHelper(new_client.this);
-            save.setOnClickListener(this);
-            cancel.setOnClickListener(this);
+           // save.setOnClickListener(this);
+           // cancel.setOnClickListener(this);
 
             Log.e(getClass().getName(), "initComponents");
 
@@ -132,16 +133,33 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.save, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.save_menu:
+                insertClient();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        /*switch (v.getId()){
             case R.id.nc_save:
                 insertClient();
                 break;
             case R.id.nc_cancel:
                 finish();
                 break;
-        }
+        }*/
     }
 }

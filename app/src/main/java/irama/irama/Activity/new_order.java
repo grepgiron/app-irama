@@ -1,36 +1,22 @@
-package irama.irama;
+package irama.irama.Activity;
 
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
 
 import java.util.ArrayList;
 
-import irama.irama.Adapters.ClientsAdapter;
+import irama.irama.Controllers.Adapters.ClientsAdapter;
 import irama.irama.Controllers.getData;
 import irama.irama.Models.clients;
-import irama.irama.Sqlite.DBHelper;
-import irama.irama.Sqlite.Tables.feedSqlite;
+import irama.irama.R;
 
 public class new_order extends AppCompatActivity {
 

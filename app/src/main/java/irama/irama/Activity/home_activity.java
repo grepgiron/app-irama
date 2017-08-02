@@ -1,7 +1,6 @@
-package irama.irama;
+package irama.irama.Activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -13,11 +12,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
-import at.markushi.ui.CircleButton;
-import irama.irama.Adapters.ViewPagerAdapter;
-import irama.irama.Fragmets.*;
+import irama.irama.Controllers.Adapters.ViewPagerAdapter;
+import irama.irama.Activity.Fragmets.*;
+import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
 
 

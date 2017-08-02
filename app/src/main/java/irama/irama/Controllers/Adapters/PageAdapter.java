@@ -1,11 +1,11 @@
-package irama.irama.Adapters;
+package irama.irama.Controllers.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import irama.irama.Fragmets.list_complete;
-import irama.irama.Fragmets.list_pending;
+import irama.irama.Activity.Fragmets.list_complete;
+import irama.irama.Activity.Fragmets.list_pending;
 
 /**
  * Created by enagi on 26/6/2017.

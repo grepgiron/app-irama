@@ -1,9 +1,8 @@
-package irama.irama.Adapters;
+package irama.irama.Controllers.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import irama.irama.Models.order;
 import irama.irama.Models.parameters;
 import irama.irama.R;
 

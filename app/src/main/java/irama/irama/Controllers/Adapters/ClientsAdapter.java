@@ -1,4 +1,4 @@
-package irama.irama.Adapters;
+package irama.irama.Controllers.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import irama.irama.Models.clients;
 import irama.irama.R;
-import irama.irama.detail_order;
+import irama.irama.Activity.detail_order;
 
 /**
  * Created by grego on 13/7/2017.

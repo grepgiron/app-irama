@@ -1,4 +1,4 @@
-package irama.irama.Fragmets;
+package irama.irama.Activity.Fragmets;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -27,13 +26,12 @@ import java.util.ArrayList;
 
 import at.markushi.ui.CircleButton;
 import irama.irama.Controllers.AppController;
-import irama.irama.Controllers.getData;
 import irama.irama.Models.order;
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
-import irama.irama.Sqlite.Tables.feedSqlite;
-import irama.irama.new_client;
-import irama.irama.new_order;
+import irama.irama.Sqlite.feedSqlite;
+import irama.irama.Activity.new_client;
+import irama.irama.Activity.new_order;
 
 /**
  * Created by grego on 18/7/2017.

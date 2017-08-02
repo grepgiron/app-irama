@@ -53,7 +53,6 @@
                         android:textAlignment="textEnd" />
 
                     <EditText
-                        android:id="@+id/nc_name"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="36dp"
@@ -70,7 +69,6 @@
                         android:textAlignment="textEnd" />
 
                     <EditText
-                        android:id="@+id/nc_rtn"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -86,7 +84,6 @@
                         android:textAlignment="textEnd" />
 
                     <EditText
-                        android:id="@+id/nc_phone"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -102,7 +99,6 @@
                         android:textAlignment="textEnd" />
 
                     <EditText
-                        android:id="@+id/nc_emails"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -118,7 +114,6 @@
                         android:textAlignment="textEnd" />
 
                     <EditText
-                        android:id="@+id/nc_direction"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:maxLines="2"

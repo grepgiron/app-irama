@@ -1,7 +1,6 @@
-package irama.irama.Adapters;
+package irama.irama.Controllers.Adapters;
 
 import android.widget.Filter;
-import android.widget.Filterable;
 
 import java.util.ArrayList;
 

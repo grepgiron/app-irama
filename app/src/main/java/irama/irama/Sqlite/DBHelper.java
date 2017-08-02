@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import irama.irama.Sqlite.Tables.feedSqlite;
-
 /**
  * Created by enagi on 28/6/2017.
  */

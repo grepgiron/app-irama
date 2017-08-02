@@ -1,20 +1,10 @@
 package irama.irama.Controllers;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -23,7 +13,7 @@ import irama.irama.Models.order;
 import irama.irama.Models.order_type;
 import irama.irama.Models.parameters;
 import irama.irama.Sqlite.DBHelper;
-import irama.irama.Sqlite.Tables.feedSqlite;
+import irama.irama.Sqlite.feedSqlite;
 
 /**
  * Created by grego on 23/7/2017.

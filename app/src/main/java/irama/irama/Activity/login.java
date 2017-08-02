@@ -1,4 +1,4 @@
-package irama.irama;
+package irama.irama.Activity;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,8 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
-import irama.irama.Sqlite.Tables.feedSqlite;
+import irama.irama.Sqlite.feedSqlite;
 
 /**
  * Created by grego on 2/7/2017.

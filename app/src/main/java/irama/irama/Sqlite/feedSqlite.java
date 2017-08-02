@@ -1,4 +1,4 @@
-package irama.irama.Sqlite.Tables;
+package irama.irama.Sqlite;
 
 import android.provider.BaseColumns;
 
@@ -15,10 +15,12 @@ public final class feedSqlite {
         public static final String TABLE_NAME = "users";
         public static final String COLUMN_USER = "user";
         public static final String COLUMN_PASS = "pass";
+        public static final String COLUMN_PIN = "pin";
         public static final String COLUMN_TOKEN = "token";
         public static final String COLUMN_USER_ID = "userId";
 
         private static final String TEXT_TYPE = " TEXT";
+        private static final String INT_TYPE = " INTEGER";
         private static final String COMMA_SEP = ",";
 
         public static final String SQL_CREATE_USERS =
@@ -26,6 +28,7 @@ public final class feedSqlite {
                         _ID + " INTEGER PRIMARY KEY," +
                         COLUMN_USER + TEXT_TYPE + COMMA_SEP +
                         COLUMN_PASS + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_PIN + INT_TYPE + COMMA_SEP +
                         COLUMN_TOKEN + TEXT_TYPE + COMMA_SEP +
                         COLUMN_USER_ID + TEXT_TYPE + " )";
 
@@ -49,7 +52,6 @@ public final class feedSqlite {
         public static final String COLUMN_CLIENT_EMAIL = "email";
         public static final String COLUMN_CLIENT_PHONE = "phone";
         public static final String COLUMN_CLIENT_DIRECTION = "direction";
-        public static final String COLUMN_CLIENT_ACTIVE = "active";
         public static final String COLUMN_CLIENT_SYNC = "clientSync";
 
         private static final String TEXT_TYPE = " TEXT";
@@ -66,7 +68,6 @@ public final class feedSqlite {
                         COLUMN_CLIENT_PHONE + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_EMAIL + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_DIRECTION + TEXT_TYPE + COMMA_SEP +
-                        COLUMN_CLIENT_ACTIVE + BOOLEAN_TYPE + COMMA_SEP +
                         COLUMN_CLIENT_SYNC + BOOLEAN_TYPE + " )";
 
         public static final String SQL_DROP_CLIENTS =
@@ -74,20 +75,18 @@ public final class feedSqlite {
 
         public static final String QUERY_CLIENTS =
                 "SELECT " + _ID + COMMA_SEP +
-                        feedClient.COLUMN_CLIENT_NAME + COMMA_SEP +
-                        feedClient.COLUMN_CLIENT_RTN + COMMA_SEP +
-                        feedClient.COLUMN_CLIENT_PHONE + COMMA_SEP +
-                        feedClient.COLUMN_CLIENT_CODE + COMMA_SEP +
-                        feedClient.COLUMN_CLIENT_ACTIVE +
-                        " FROM " + feedClient.TABLE_NAME;
-
-
+                        COLUMN_CLIENT_NAME + COMMA_SEP +
+                        COLUMN_CLIENT_RTN + COMMA_SEP +
+                        COLUMN_CLIENT_PHONE + COMMA_SEP +
+                        COLUMN_CLIENT_DIRECTION +
+                        " FROM " + TABLE_NAME;
     }
 
     public static class feedProductCategory implements BaseColumns{
 
         public static final String TABLE_NAME = "categoryProduct";
         public static final String COLUMN_CATEGORY_ID = "categoryId";
+        public static final String COLUMN_CATEGORY_CODE = "code";
         public static final String COLUMN_CATEGORY_NAME = "name";
         public static final String COLUMN_CATEGORY_DESCRIPTION = "description";
 
@@ -98,6 +97,7 @@ public final class feedSqlite {
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY," +
                         COLUMN_CATEGORY_ID + TEXT_TYPE + COMMA_SEP +
+                        COLUMN_CATEGORY_CODE + TEXT_TYPE +COMMA_SEP +
                         COLUMN_CATEGORY_NAME + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CATEGORY_DESCRIPTION + TEXT_TYPE + " )";
 

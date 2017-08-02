@@ -1,4 +1,4 @@
-package irama.irama;
+package irama.irama.Activity;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.EditText;
+
+import irama.irama.R;
 
 /**
  * Created by grego on 16/7/2017.

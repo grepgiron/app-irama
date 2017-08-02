@@ -1,4 +1,4 @@
-package irama.irama.Fragmets;
+package irama.irama.Activity.Fragmets;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,11 +16,11 @@ import android.widget.CheckBox;
 
 import java.util.ArrayList;
 
-import irama.irama.Adapters.HolderAdapter;
+import irama.irama.Controllers.Adapters.HolderAdapter;
 import irama.irama.Models.parameters;
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
-import irama.irama.Sqlite.Tables.feedSqlite;
+import irama.irama.Sqlite.feedSqlite;
 
 /**
  * Created by enagi on 26/6/2017.

@@ -1,4 +1,4 @@
-package irama.irama.Fragmets;
+package irama.irama.Activity.Fragmets;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,24 +10,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import irama.irama.Adapters.HolderAdapter;
-import irama.irama.Adapters.OrdersAdapter;
-import irama.irama.Models.order;
+import irama.irama.Controllers.Adapters.HolderAdapter;
 import irama.irama.Models.parameters;
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
-import irama.irama.Sqlite.Tables.feedSqlite;
+import irama.irama.Sqlite.feedSqlite;
 
 /**
  * Created by enagi on 26/6/2017.

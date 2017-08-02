@@ -1,4 +1,4 @@
-package irama.irama.Adapters;
+package irama.irama.Controllers.Adapters;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -13,18 +13,12 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import irama.irama.Models.order;
 import irama.irama.Models.parameters;
 import irama.irama.R;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by enagi on 1/7/2017.

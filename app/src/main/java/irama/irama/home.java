@@ -11,9 +11,7 @@ import android.database.sqlite.SQLiteException;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,14 +22,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import irama.irama.Adapters.PageAdapter;
-import irama.irama.Models.order;
+import irama.irama.Activity.new_order;
+import irama.irama.Controllers.Adapters.PageAdapter;
 import irama.irama.Sqlite.DBHelper;
-import irama.irama.Sqlite.Tables.feedSqlite;
+import irama.irama.Sqlite.feedSqlite;
 
 public class home extends AppCompatActivity {
 
