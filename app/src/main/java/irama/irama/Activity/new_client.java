@@ -156,24 +156,6 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
                     sqLiteDatabase.close();
                 }
 
-                if(networkState.statusConnection(this.getBaseContext())){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage("Sync new client?").setCancelable(false).setPositiveButton("Yes",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                            dialog.cancel();
-                        }
-                    });
-                    builder.show();
-                }
-
                 Log.e(getClass().getName(), "save clicked ok");
                 finish();
 

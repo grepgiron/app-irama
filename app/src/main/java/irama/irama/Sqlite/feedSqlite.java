@@ -78,7 +78,9 @@ public final class feedSqlite {
                         COLUMN_CLIENT_NAME + COMMA_SEP +
                         COLUMN_CLIENT_RTN + COMMA_SEP +
                         COLUMN_CLIENT_PHONE + COMMA_SEP +
-                        COLUMN_CLIENT_DIRECTION +
+                        COLUMN_CLIENT_EMAIL + COMMA_SEP +
+                        COLUMN_CLIENT_DIRECTION + COMMA_SEP +
+                        COLUMN_CLIENT_SYNC +
                         " FROM " + TABLE_NAME;
     }
 

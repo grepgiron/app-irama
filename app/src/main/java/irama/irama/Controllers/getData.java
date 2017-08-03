@@ -51,7 +51,8 @@ public class getData {
             if( c != null){
                 if(c.moveToFirst()){
                     do{
-                        client = new clients(c.getString(0), c.getString(1), c.getString(2), c.getString(3), c.getInt(4));
+                        client = new clients(c.getString(0), c.getString(1), c.getString(2),
+                                c.getString(3), c.getString(4), c.getString(5), c.getInt(6));
                         arrayOfClients.add(client);
                     }while (c.moveToNext());
                 }

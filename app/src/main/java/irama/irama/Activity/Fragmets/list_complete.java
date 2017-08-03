@@ -26,7 +26,7 @@ import irama.irama.Sqlite.feedSqlite;
  * Created by enagi on 26/6/2017.
  */
 
-public class list_complete extends Fragment {
+public class    list_complete extends Fragment {
 
     private DBHelper dbHelper;
     private SQLiteDatabase db;

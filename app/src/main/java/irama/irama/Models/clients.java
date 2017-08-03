@@ -7,6 +7,7 @@ package irama.irama.Models;
 public class clients {
 
     private String _id;
+    private String cliendId;
     private String code;
     private String name;
     private String phone;
@@ -27,11 +28,13 @@ public class clients {
         this.address = address;
     }
 
-    public clients(String _id, String name, String rtn, String code, int isActive) {
+    public clients(String _id, String name, String rtn, String phone,String email, String address, int isActive) {
         this._id = _id;
-        this.code = code;
+        this.phone = phone;
         this.name = name;
         this.rtn = rtn;
+        this.email = email;
+        this.address = address;
         this.isActive = isActive;
     }
 
@@ -114,5 +117,13 @@ public class clients {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCliendId() {
+        return cliendId;
+    }
+
+    public void setCliendId(String cliendId) {
+        this.cliendId = cliendId;
     }
 }

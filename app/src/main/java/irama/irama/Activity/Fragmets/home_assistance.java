@@ -45,13 +45,13 @@ public class home_assistance extends Fragment {
     private SQLiteDatabase db;
     private DBHelper dbHelper;
     private SQLiteDatabase sqLiteDatabase;
-    private ArrayList<order> arrayOfOrders;
+    private ArrayList<clients> arrayOfClients;
 
     private postData postData;
 
     private ContentValues values;
 
-    private String url = "http://192.168.1.122:4000/api/clients";
+    private String url = "https://irama.api.cuatrocubossoluciones.com/api/clients";
 
     public home_assistance() {
     }
@@ -87,7 +87,7 @@ public class home_assistance extends Fragment {
         syncClients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postData.postClients();
+                postData.postClients(getClientSQLite());
                 Log.e(getClass().getName(), "sync clients");
             }
         });
@@ -119,7 +119,10 @@ public class home_assistance extends Fragment {
             syncOrders = (CircleButton) view.findViewById(R.id.assistance_sync_orders);
             syncClients = (CircleButton) view.findViewById(R.id.assistance_sync_clients);
             getClients = (CircleButton) view.findViewById(R.id.assistance_get_clients);
+
             postData = new postData(view.getContext());
+            arrayOfClients = new ArrayList<clients>();
+
             Log.e(getClass().getName(), "initComponents");
         }catch (Exception e){
             Log.e(getClass().getName(), "error: " + e);
@@ -196,6 +199,10 @@ public class home_assistance extends Fragment {
                     Log.e(getClass().getSimpleName(), e.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }finally {
+                    if(sqLiteDatabase!=null) {
+                        sqLiteDatabase.close();
+                    }
                 }
             }
         }, new Response.ErrorListener() {
@@ -207,5 +214,31 @@ public class home_assistance extends Fragment {
         AppController.getInstance().addToRequestQueue(req);
     }
 
+    private ArrayList<clients> getClientSQLite(){
 
+        try{
+            sqLiteDatabase = dbHelper.getWritableDatabase();
+            Cursor c = sqLiteDatabase.rawQuery(feedSqlite.feedClient.QUERY_CLIENTS, null);
+            if(c != null){
+                if(c.moveToFirst()){
+                    do {
+                        if (c.getInt(6) != 1){
+                            arrayOfClients.add(new clients(c.getString(0), c.getString(1), c.getString(2),
+                                    c.getString(3), c.getString(4), c.getString(5), c.getInt(6)));
+                        }
+                    }while (c.moveToNext());
+                }
+            }
+
+            Log.e(getClass().getSimpleName(), "getClients().Sql");
+
+        }catch (SQLiteException e){
+            Log.e(getClass().getSimpleName(), "Error: " + e);
+        }finally {
+            if(sqLiteDatabase!=null){
+                sqLiteDatabase.close();
+            }
+        }
+        return arrayOfClients;
+    }
 }
