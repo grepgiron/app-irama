@@ -40,8 +40,6 @@ public final class feedSqlite {
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
     }
 
-
-
     public static class feedClient implements BaseColumns{
 
         public static final String TABLE_NAME = "clients";
@@ -87,11 +85,40 @@ public final class feedSqlite {
                         " FROM " + TABLE_NAME;
     }
 
+    public static  class feedProduct implements BaseColumns{
+
+        public static final String TABLE_NAME = "product";
+        public static final String COLUMN_PRODUCT_ID = "productId";
+        public static final String COLUMN_PRODUCT_UNIT = "unit";
+        public static final String COLUMN_PRODUCT_NAME = "name";
+        public static final String COLUMN_PRODUCT_DESCRIPTION = "description";
+        public static final String COLUMN_PRODUCT_CATEGORY = "product_category";
+        public static final String COLUMN_PRODUCT_SYNC = "sync";
+
+        private static final String TEXT_TYPE = " TEXT";
+        private static final String COMMA_SEP = ",";
+        private static final String BOOLEAN_TYPE = " BOOLEAN";
+
+        public static final String CREATE_TABLE =
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                _ID + " INTEGER PRIMARY KEY," +
+                COLUMN_PRODUCT_ID + TEXT_TYPE + COMMA_SEP +
+                COLUMN_PRODUCT_NAME + TEXT_TYPE + COMMA_SEP +
+                COLUMN_PRODUCT_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
+                COLUMN_PRODUCT_UNIT + " INTEGER " + COMMA_SEP +
+                COLUMN_PRODUCT_CATEGORY + TEXT_TYPE + COMMA_SEP +
+                COLUMN_PRODUCT_SYNC + BOOLEAN_TYPE + " )";
+
+        public static final String DROP =
+                "DROP IF EXISTS " + TABLE_NAME;
+
+    }
+
+
     public static class feedProductCategory implements BaseColumns{
 
         public static final String TABLE_NAME = "categoryProduct";
         public static final String COLUMN_CATEGORY_ID = "categoryId";
-        public static final String COLUMN_CATEGORY_CODE = "code";
         public static final String COLUMN_CATEGORY_NAME = "name";
         public static final String COLUMN_CATEGORY_DESCRIPTION = "description";
 
@@ -102,7 +129,6 @@ public final class feedSqlite {
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY," +
                         COLUMN_CATEGORY_ID + TEXT_TYPE + COMMA_SEP +
-                        COLUMN_CATEGORY_CODE + TEXT_TYPE +COMMA_SEP +
                         COLUMN_CATEGORY_NAME + TEXT_TYPE + COMMA_SEP +
                         COLUMN_CATEGORY_DESCRIPTION + TEXT_TYPE + " )";
 

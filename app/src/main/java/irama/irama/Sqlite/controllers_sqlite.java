@@ -26,14 +26,16 @@ public class controllers_sqlite {
         dbHelper = new DBHelper(context);
     }
 
-    public void updatedClient(String _id, String rtn){
+    public void updatedClient(String _id, String rtn, String code){
 
         db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         try {
             values.put(feedSqlite.feedClient.COLUMN_CLIENT_ID, _id);
+            values.put(feedSqlite.feedClient.COLUMN_CLIENT_CODE, code);
             values.put(feedSqlite.feedClient.COLUMN_CLIENT_SYNC, 1);
-            db.update(feedSqlite.feedClient.TABLE_NAME, values, feedSqlite.feedClient._ID + "=?", new String[]{rtn} );
+            Log.e(getClass().getSimpleName(), feedSqlite.feedClient.COLUMN_CLIENT_RTN + "="+ rtn);
+            db.update(feedSqlite.feedClient.TABLE_NAME, values, feedSqlite.feedClient.COLUMN_CLIENT_RTN + "="+ rtn, null );
         } catch (SQLiteException e) {
             e.printStackTrace();
         }finally {

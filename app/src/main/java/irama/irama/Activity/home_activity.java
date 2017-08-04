@@ -14,8 +14,9 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import irama.irama.Activity.Fragmets.Home_Assistance.home_assistance;
+import irama.irama.Activity.Fragmets.List_Complete.list_complete;
+import irama.irama.Activity.Fragmets.List_Pending.list_pending;
 import irama.irama.Controllers.Adapters.ViewPagerAdapter;
-import irama.irama.Activity.Fragmets.*;
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
 

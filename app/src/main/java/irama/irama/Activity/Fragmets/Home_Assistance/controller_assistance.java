@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import irama.irama.Controllers.AppController;
+import irama.irama.Controllers.Links;
 import irama.irama.Controllers.postData;
 import irama.irama.Models.clients;
 import irama.irama.Sqlite.DBHelper;
@@ -41,7 +42,7 @@ public class controller_assistance {
 
     private ContentValues values;
 
-    private String url = "http://192.168.1.102:4000/api/clients";
+    private String url = Links.clients;
 
     public controller_assistance(Context context) {
         this.context = context;

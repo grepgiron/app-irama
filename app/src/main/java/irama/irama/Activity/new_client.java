@@ -218,17 +218,6 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
         return true;
     }
 
-    private Boolean validateRTN(String RTN){
-
-        if (RTN.length() < 13){
-            rtnLayout.setError("Invalidate RTN");
-            return false;
-        }else {
-            rtnLayout.setError(null);
-        }
-        return true;
-    }
-
     private Boolean validatePhone(String phones){
 
         if (!Patterns.PHONE.matcher(phones).matches()){
@@ -253,13 +242,14 @@ public class new_client extends AppCompatActivity implements View.OnClickListene
 
 
     private void validateData(){
+
         boolean a = validateName(name.getText().toString());
-        boolean b = validateRTN(rtn.getText().toString());
         boolean c = validatePhone(phone.getText().toString());
         boolean d = validateEmail(email.getText().toString());
-        if (a && b && c && d){
+        if (a && c && d){
             insertClient();
         }
+
     }
 
 }

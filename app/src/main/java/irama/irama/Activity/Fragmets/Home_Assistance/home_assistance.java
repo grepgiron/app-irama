@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import at.markushi.ui.CircleButton;
 import irama.irama.Controllers.AppController;
+import irama.irama.Controllers.Links;
 import irama.irama.Controllers.postData;
 import irama.irama.Models.clients;
 import irama.irama.Models.order;
@@ -55,7 +56,7 @@ public class home_assistance extends Fragment {
 
     private ContentValues values;
 
-    private String url = "http://192.168.1.102:4000/api/clients";
+    private String url = Links.clients;
 
     public home_assistance() {
     }
@@ -71,7 +72,7 @@ public class home_assistance extends Fragment {
         newClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(getClass().getName(), "new client");
+                Log.d(getClass().getName(), "new client");
                 Intent intent = new Intent(getContext(), new_client.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -81,7 +82,7 @@ public class home_assistance extends Fragment {
         newOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(getClass().getName(), "new order");
+                Log.d(getClass().getName(), "new order");
                 Intent intent = new Intent(getContext(), new_order.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -107,7 +108,7 @@ public class home_assistance extends Fragment {
             @Override
             public void onClick(View v) {
                 controller.requestClients();
-                Toast.makeText(getContext(), "list updated", Toast.LENGTH_LONG);
+                Toast.makeText(view.getContext(), "List updated", Toast.LENGTH_LONG).show();
                 Log.d(getClass().getName(), "get clients");
 
             }

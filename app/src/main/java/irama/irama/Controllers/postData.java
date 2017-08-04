@@ -53,7 +53,7 @@ public class postData {
             for(position = 0; position < arrayClients.size(); position++){
                 try {
                     RequestQueue requestQueue = Volley.newRequestQueue(this.context);
-                    String URL = "http://192.168.1.102:4000/api/clients";
+                    String URL = Links.clients;
                     JSONObject jsonBody = new JSONObject();
 
                     jsonBody.put("name", arrayClients.get(position).getName());
@@ -102,12 +102,14 @@ public class postData {
                                 ContentValues values = new ContentValues();
                                 responseString = String.valueOf(response.statusCode);
                                 String string = "";
+                                String _id, code;
                                 try {
 
                                     string = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
                                     jsonObject = new JsonParser().parse(string).getAsJsonObject();
-                                    string = jsonObject.get("_id").toString();
-                                    //controller.updatedClient(string, rtn);
+                                    _id = jsonObject.get("_id").toString().replaceAll("\"", "");
+                                    code = jsonObject.get("code").toString().replaceAll("\"", "");
+                                    controller.updatedClient(_id, rtn, code);
 
                                 } catch (UnsupportedEncodingException e) {
                                     e.printStackTrace();
@@ -128,6 +130,10 @@ public class postData {
 
             }
         }
+    }
+
+    public void postOrders(){
+
     }
 
 }

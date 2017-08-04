@@ -3,6 +3,13 @@
     <string name="client_search">Cliente</string>
     <string name="client_searchHint">Buscar</string>
     <string name="title_activity_scrolling_client">ScrollingActivityClient</string>
+    <string name="save">Save</string>
+
+
+
+
+
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
