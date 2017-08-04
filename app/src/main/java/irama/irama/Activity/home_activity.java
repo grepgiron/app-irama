@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+import irama.irama.Activity.Fragmets.Home_Assistance.home_assistance;
 import irama.irama.Controllers.Adapters.ViewPagerAdapter;
 import irama.irama.Activity.Fragmets.*;
 import irama.irama.R;
@@ -92,7 +93,7 @@ public class home_activity extends AppCompatActivity{
             }
         });
 
-        initViewPager(viewPager);
+        initViewPager(viewPager);//99951452
 
         if(sharedPreferences.getBoolean("database_created", true)){
 

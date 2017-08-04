@@ -73,6 +73,9 @@ public final class feedSqlite {
         public static final String SQL_DROP_CLIENTS =
                 "DROP TABLE IF EXISTS " + TABLE_NAME;
 
+        public static final String EXIST_CLIENT = "SELECT " + COLUMN_CLIENT_NAME +
+                " FROM " + TABLE_NAME + " WHERE " + COLUMN_CLIENT_RTN + " =?";
+
         public static final String QUERY_CLIENTS =
                 "SELECT " + _ID + COMMA_SEP +
                         COLUMN_CLIENT_NAME + COMMA_SEP +

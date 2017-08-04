@@ -1,10 +1,12 @@
-package irama.irama.Activity.Fragmets;
+package irama.irama.Activity.Fragmets.Home_Assistance;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -48,10 +51,11 @@ public class home_assistance extends Fragment {
     private ArrayList<clients> arrayOfClients;
 
     private postData postData;
+    private controller_assistance controller;
 
     private ContentValues values;
 
-    private String url = "https://irama.api.cuatrocubossoluciones.com/api/clients";
+    private String url = "http://192.168.1.102:4000/api/clients";
 
     public home_assistance() {
     }
@@ -87,23 +91,24 @@ public class home_assistance extends Fragment {
         syncClients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postData.postClients(getClientSQLite());
-                Log.e(getClass().getName(), "sync clients");
+                postData.postClients(controller.getClientSQLite());
+                Log.d(getClass().getName(), "sync clients");
             }
         });
 
         syncOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(getClass().getName(), "sync order");
+                Log.d(getClass().getName(), "sync order");
             }
         });
 
         getClients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestClients();
-                Log.e(getClass().getName(), "get clients");
+                controller.requestClients();
+                Toast.makeText(getContext(), "list updated", Toast.LENGTH_LONG);
+                Log.d(getClass().getName(), "get clients");
 
             }
         });
@@ -111,6 +116,7 @@ public class home_assistance extends Fragment {
         return view;
     }
 
+    //(y)
     private void initComponents(View view){
         try {
             dbHelper = new DBHelper(view.getContext());
@@ -121,9 +127,11 @@ public class home_assistance extends Fragment {
             getClients = (CircleButton) view.findViewById(R.id.assistance_get_clients);
 
             postData = new postData(view.getContext());
-            arrayOfClients = new ArrayList<clients>();
+            //arrayOfClients = new ArrayList<clients>();
 
-            Log.e(getClass().getName(), "initComponents");
+            controller = new controller_assistance(view.getContext());
+
+            Log.d(getClass().getName(), "initComponents");
         }catch (Exception e){
             Log.e(getClass().getName(), "error: " + e);
         }
@@ -146,74 +154,74 @@ public class home_assistance extends Fragment {
             Log.e(getClass().getName(), "error: " + e);
         }
 
-
         return false;
     }
 
-    private void requestClients(){
+    //(y)
+    /*private void requestClients(){
 
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Updating Clients");
+        progressDialog.setMessage("Please wait while the list clients is updated");
+        progressDialog.show();
+
+        Runnable progressRunnable = new Runnable() {
             @Override
-            public void onResponse(JSONObject response) {
-                JSONArray array = null;
-                values = new ContentValues();
+            public void run() {
+                JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        JSONArray array = null;
+                        values = new ContentValues();
+                        try {
+                            sqLiteDatabase = dbHelper.getWritableDatabase();
+                            array = response.getJSONArray("content");
+                            if(array != null){
+                                for(int i = 0; i < array.length(); i++){
+                                    JSONObject client = (JSONObject)array.get(i);
 
-                try {
-                    sqLiteDatabase = dbHelper.getWritableDatabase();
-                    array = response.getJSONArray("content");
+                                    Cursor c = sqLiteDatabase.rawQuery(feedSqlite.feedClient.EXIST_CLIENT, new String[]{client.getString("rtn")});
+                                    if(!(c.getCount() > 0))
+                                    {
+                                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_ID, client.getString("_id"));
+                                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_NAME, client.getString("name"));
+                                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_CODE, client.getString("code"));
+                                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_RTN, client.getString("rtn"));
+                                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_EMAIL, client.getString("email"));
+                                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_DIRECTION, client.getString("address"));
+                                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_PHONE, client.getString("phone"));
+                                        values.put(feedSqlite.feedClient.COLUMN_CLIENT_SYNC, 1);
 
-                    if(array != null){
-                        for(int i = 0; i < array.length(); i++){
-                            JSONObject client = (JSONObject)array.get(i);
+                                        sqLiteDatabase.insertWithOnConflict(feedSqlite.feedClient.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                                    }
+                                }
+                            }
 
-                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_ID, client.getString("_id"));
-                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_NAME, client.getString("name"));
-                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_CODE, client.getString("code"));
-                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_RTN, client.getString("rtn"));
-                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_EMAIL, client.getString("email"));
-                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_DIRECTION, client.getString("address"));
-                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_PHONE, client.getString("phone"));
-                            values.put(feedSqlite.feedClient.COLUMN_CLIENT_SYNC, 1);
-
-                            sqLiteDatabase.insertWithOnConflict(feedSqlite.feedClient.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-
-                        /*String id = client.getString("_id");
-                        String code = client.getString("code");
-                        String name = client.getString("name");
-                        String rtn = client.getString("rtn");
-                        String email = client.getString("email");
-                        String address = client.getString("address");
-                        String phone = client.getString("phone");
-
-                        json += "_id: " + id + "\n";
-                        json += "_code: " + code + "\n";
-                        json += "_name: " + name + "\n";
-                        json += "_rtn: " + rtn + "\n";
-                        json += "_email: " + email + "\n";
-                        json += "_address: " + address + "\n";
-                        json += "_phone: " + phone + "\n\n";*/
+                        }catch (SQLiteException e){
+                            Log.e(getClass().getSimpleName(), e.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }finally {
+                            if(sqLiteDatabase!=null) {
+                                sqLiteDatabase.close();
+                            }
                         }
                     }
-
-                }catch (SQLiteException e){
-                    Log.e(getClass().getSimpleName(), e.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }finally {
-                    if(sqLiteDatabase!=null) {
-                        sqLiteDatabase.close();
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(getClass().getSimpleName(), error.toString());
                     }
-                }
+                });
+                AppController.getInstance().addToRequestQueue(req);
+                progressDialog.cancel();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(getClass().getSimpleName(), error.toString());
-            }
-        });
-        AppController.getInstance().addToRequestQueue(req);
+        };
+        Handler handlerProgress = new Handler();
+        handlerProgress.postDelayed(progressRunnable, 1000);
     }
 
+    //(y)
     private ArrayList<clients> getClientSQLite(){
 
         try{
@@ -230,7 +238,7 @@ public class home_assistance extends Fragment {
                 }
             }
 
-            Log.e(getClass().getSimpleName(), "getClients().Sql");
+            Log.d(getClass().getSimpleName(), "getClients().Sql");
 
         }catch (SQLiteException e){
             Log.e(getClass().getSimpleName(), "Error: " + e);
@@ -240,5 +248,5 @@ public class home_assistance extends Fragment {
             }
         }
         return arrayOfClients;
-    }
+    }*/
 }

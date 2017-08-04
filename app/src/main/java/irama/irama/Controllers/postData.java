@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import irama.irama.Models.clients;
 import irama.irama.Sqlite.DBHelper;
+import irama.irama.Sqlite.controllers_sqlite;
 import irama.irama.Sqlite.feedSqlite;
 
 /**
@@ -38,11 +39,13 @@ public class postData {
     private int position;
     private SQLiteDatabase db;
     private DBHelper dbHelper;
+    private controllers_sqlite controller;
 
     public postData(Context context) {
         this.context = context;
         dbHelper = new DBHelper(context);
         this.position = 0;
+        controller = new controllers_sqlite(context);
     }
 
     public void postClients(final ArrayList<clients> arrayClients){
@@ -50,13 +53,16 @@ public class postData {
             for(position = 0; position < arrayClients.size(); position++){
                 try {
                     RequestQueue requestQueue = Volley.newRequestQueue(this.context);
-                    String URL = "https://irama.api.cuatrocubossoluciones.com/api/clients";
+                    String URL = "http://192.168.1.102:4000/api/clients";
                     JSONObject jsonBody = new JSONObject();
+
                     jsonBody.put("name", arrayClients.get(position).getName());
                     jsonBody.put("rtn", arrayClients.get(position).getRtn());
                     jsonBody.put("email", arrayClients.get(position).getEmail());
                     jsonBody.put("address", arrayClients.get(position).getAddress());
                     jsonBody.put("phone", arrayClients.get(position).getPhone());
+
+                    final String rtn = arrayClients.get(position).getRtn();
 
                     final String requestBody = jsonBody.toString();
 
@@ -101,9 +107,7 @@ public class postData {
                                     string = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
                                     jsonObject = new JsonParser().parse(string).getAsJsonObject();
                                     string = jsonObject.get("_id").toString();
-                                    values.put(feedSqlite.feedClient.COLUMN_CLIENT_ID, string);
-                                    values.put(feedSqlite.feedClient.COLUMN_CLIENT_SYNC, 1);
-                                    db.update(feedSqlite.feedClient.TABLE_NAME, values, feedSqlite.feedClient._ID + "=?", new String[]{arrayClients.get(position).get_id().toString()} );
+                                    //controller.updatedClient(string, rtn);
 
                                 } catch (UnsupportedEncodingException e) {
                                     e.printStackTrace();
@@ -112,7 +116,7 @@ public class postData {
                                         db.close();
                                     }
                                 }
-                                Log.e("response post", string);
+                                Log.e("response post", string + " " + rtn);
                             }
                             return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
                         }
