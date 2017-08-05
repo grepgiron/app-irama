@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -35,11 +36,10 @@ public class controller_assistance {
 
     private Context context;
 
-    private SQLiteDatabase db;
     private DBHelper dbHelper;
     private SQLiteDatabase sqLiteDatabase;
-    private ArrayList<clients> arrayOfClients;
 
+    private ArrayList<clients> arrayOfClients;
     private ContentValues values;
 
     private String url = Links.clients;
@@ -99,6 +99,7 @@ public class controller_assistance {
                             if(sqLiteDatabase!=null) {
                                 sqLiteDatabase.close();
                             }
+                            Toast.makeText(context, "List updated", Toast.LENGTH_LONG).show();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -112,39 +113,55 @@ public class controller_assistance {
             }
         };
         Handler handlerProgress = new Handler();
-        handlerProgress.postDelayed(progressRunnable, 1000);
+        handlerProgress.postDelayed(progressRunnable, 3000);
     }
 
     //(y)
-    public ArrayList<clients> getClientSQLite(){
+    public void requestProductCategorie(){
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, Links.categories, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray array = null;
+                values = new ContentValues();
+                try {
+                    sqLiteDatabase = dbHelper.getWritableDatabase();
+                    array = response.getJSONArray("content");
+                    if(array != null){
+                        for(int i = 0; i < array.length(); i++){
+                            JSONObject category = (JSONObject)array.get(i);
 
-        try{
-            sqLiteDatabase = dbHelper.getWritableDatabase();
-            Cursor c = sqLiteDatabase.rawQuery(feedSqlite.feedClient.QUERY_CLIENTS, null);
-            if(c != null){
-                if(c.moveToFirst()){
-                    do {
-                        if (c.getInt(6) != 1){
-                            arrayOfClients.add(new clients(c.getString(0), c.getString(1), c.getString(2),
-                                    c.getString(3), c.getString(4), c.getString(5), c.getInt(6)));
+                            Cursor c = sqLiteDatabase.rawQuery(feedSqlite.feedProductCategory.EXIST_CATEGORY, new String[]{category.getString("_id")});
+                            if(!(c.getCount() > 0))
+                            {
+                                values.put(feedSqlite.feedProductCategory.COLUMN_CATEGORY_NAME, category.getString("name"));
+                                values.put(feedSqlite.feedProductCategory.COLUMN_CATEGORY_DESCRIPTION, category.getString("description"));
+                                values.put(feedSqlite.feedProductCategory.COLUMN_CATEGORY_ID, category.getString("_id"));
+
+                                sqLiteDatabase.insertWithOnConflict(feedSqlite.feedProductCategory.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                            }
                         }
-                    }while (c.moveToNext());
+                    }else{
+                        Log.e(getClass().getSimpleName(), "Array empty");
+                    }
+
+                }catch (SQLiteException e){
+                    Log.e(getClass().getSimpleName(), e.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }finally {
+                    if(sqLiteDatabase!=null) {
+                        sqLiteDatabase.close();
+                    }
+                    Toast.makeText(context, "List updated", Toast.LENGTH_LONG).show();
                 }
             }
-
-            Log.d(getClass().getSimpleName(), "getClients().Sql");
-
-        }catch (SQLiteException e){
-            Log.e(getClass().getSimpleName(), "Error: " + e);
-        }finally {
-            if(sqLiteDatabase!=null){
-                sqLiteDatabase.close();
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(getClass().getSimpleName(), error.toString());
             }
-        }
-        return arrayOfClients;
+        });
+
     }
-
-
-
 
 }

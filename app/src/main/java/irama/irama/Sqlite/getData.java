@@ -1,4 +1,4 @@
-package irama.irama.Controllers;
+package irama.irama.Sqlite;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -97,6 +97,34 @@ public class getData {
             }
         }
         return arrayOfParameters;
+    }
+
+    public ArrayList<clients> getClientSQLite(){
+
+        try{
+            sqLiteDatabase = dbHelper.getWritableDatabase();
+            Cursor c = sqLiteDatabase.rawQuery(feedSqlite.feedClient.QUERY_CLIENTS, null);
+            if(c != null){
+                if(c.moveToFirst()){
+                    do {
+                        if (c.getInt(6) != 1){
+                            arrayOfClients.add(new clients(c.getString(0), c.getString(1), c.getString(2),
+                                    c.getString(3), c.getString(4), c.getString(5), c.getInt(6)));
+                        }
+                    }while (c.moveToNext());
+                }
+            }
+
+            Log.d(getClass().getSimpleName(), "getClients().Sql");
+
+        }catch (SQLiteException e){
+            Log.e(getClass().getSimpleName(), "Error: " + e);
+        }finally {
+            if(sqLiteDatabase!=null){
+                sqLiteDatabase.close();
+            }
+        }
+        return arrayOfClients;
     }
 
 }

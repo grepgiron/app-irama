@@ -112,6 +112,9 @@ public final class feedSqlite {
         public static final String DROP =
                 "DROP IF EXISTS " + TABLE_NAME;
 
+        public static final String LAST_RECORD = "SELECT " + _ID + " FROM " +
+        TABLE_NAME + " WHERE " + _ID + " = (SELECT MAX(" + _ID + ") FROM " + TABLE_NAME;
+
     }
 
 
@@ -134,6 +137,9 @@ public final class feedSqlite {
 
         public static final String SQL_DROP_CATEGORY =
                 "DROP IF EXISTS " + TABLE_NAME;
+
+        public static final String EXIST_CATEGORY = "SELECT " + COLUMN_CATEGORY_NAME +
+                " FROM " + TABLE_NAME + " WHERE " + COLUMN_CATEGORY_ID + " =?";
     }
 
     public static class feedOrderType implements BaseColumns{
@@ -159,6 +165,7 @@ public final class feedSqlite {
 
         public static final String SQL_DROP_ORDERTYPE =
                 "DROP IF EXISTS " + TABLE_NAME;
+
     }
 
 

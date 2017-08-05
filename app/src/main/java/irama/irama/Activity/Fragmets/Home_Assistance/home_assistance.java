@@ -38,6 +38,7 @@ import irama.irama.Sqlite.DBHelper;
 import irama.irama.Sqlite.feedSqlite;
 import irama.irama.Activity.new_client;
 import irama.irama.Activity.new_order;
+import irama.irama.Sqlite.getData;
 
 /**
  * Created by grego on 18/7/2017.
@@ -48,10 +49,9 @@ public class home_assistance extends Fragment {
     private CircleButton newClient, newOrder, syncOrders, syncClients, getClients;
     private SQLiteDatabase db;
     private DBHelper dbHelper;
-    private SQLiteDatabase sqLiteDatabase;
-    private ArrayList<clients> arrayOfClients;
 
     private postData postData;
+    private getData getData;
     private controller_assistance controller;
 
     private ContentValues values;
@@ -92,7 +92,7 @@ public class home_assistance extends Fragment {
         syncClients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postData.postClients(controller.getClientSQLite());
+                postData.postClients(getData.getClientSQLite());
                 Log.d(getClass().getName(), "sync clients");
             }
         });
@@ -108,7 +108,6 @@ public class home_assistance extends Fragment {
             @Override
             public void onClick(View v) {
                 controller.requestClients();
-                Toast.makeText(view.getContext(), "List updated", Toast.LENGTH_LONG).show();
                 Log.d(getClass().getName(), "get clients");
 
             }

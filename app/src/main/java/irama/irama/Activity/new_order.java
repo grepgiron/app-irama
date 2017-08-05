@@ -14,7 +14,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import irama.irama.Controllers.Adapters.ClientsAdapter;
-import irama.irama.Controllers.getData;
+import irama.irama.Sqlite.getData;
 import irama.irama.Models.clients;
 import irama.irama.R;
 

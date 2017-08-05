@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
-import irama.irama.Controllers.getData;
+import irama.irama.Sqlite.getData;
 import irama.irama.R;
 import irama.irama.Sqlite.DBHelper;
 
