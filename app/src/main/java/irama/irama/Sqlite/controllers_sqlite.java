@@ -67,11 +67,11 @@ public class controllers_sqlite {
         }
     }
 
-    public void updateProduct(product product){
+    public void updateProduct(String id){
         db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         try {
-            values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_ID, product.get_id());
+            values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_ID, id);
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_SYNC, 1);
             Cursor c = db.rawQuery(feedSqlite.feedProduct.LAST_RECORD,  null);
             db.update(feedSqlite.feedProduct.TABLE_NAME, values, feedSqlite.feedProduct._ID + "=" + c.getString(0), null );
