@@ -21,6 +21,15 @@ public class order {
     public order(String s, String toString, String s1, int anInt) {
     }
 
+    public order(String id, String description, int isUrgent, String requestOn, String orderTypetId, int isSync) {
+        this.id = id;
+        this.description = description;
+        this.isUrgent = isUrgent;
+        this.requestOn = requestOn;
+        this.orderTypetId = orderTypetId;
+        this.isSync = isSync;
+    }
+
     public order(String description, String requestOn, int isSync) {
         this.description = description;
         this.requestOn = requestOn;
@@ -64,6 +73,14 @@ public class order {
         return id;
     }
 
+    public int getIsUrgent() {
+        return isUrgent;
+    }
+
+    public void setIsUrgent(int isUrgent) {
+        this.isUrgent = isUrgent;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -74,14 +91,6 @@ public class order {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int isUrgent() {
-        return isUrgent;
-    }
-
-    public void setUrgent(int urgent) {
-        isUrgent = urgent;
     }
 
     public String getRequestOn() {

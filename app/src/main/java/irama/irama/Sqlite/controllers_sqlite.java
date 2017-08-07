@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 
 import java.io.UnsupportedEncodingException;
 
+import irama.irama.Models.order;
 import irama.irama.Models.product;
 
 /**
@@ -23,18 +24,19 @@ public class controllers_sqlite {
     private Context context;
     private SQLiteDatabase db;
     private DBHelper dbHelper;
+    private ContentValues values;
 
     public controllers_sqlite(Context context) {
         this.context = context;
         dbHelper = new DBHelper(context);
+        db = dbHelper.getWritableDatabase();
+        values = new ContentValues();
     }
 
 
+    //Controllers SQLite CLIENTS
 
     public void updatedClient(String _id, String rtn, String code){
-
-        db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
         try {
             values.put(feedSqlite.feedClient.COLUMN_CLIENT_ID, _id);
             values.put(feedSqlite.feedClient.COLUMN_CLIENT_CODE, code);
@@ -50,10 +52,9 @@ public class controllers_sqlite {
         }
     }
 
-    public void insertProduct(product product){
-        db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        try {
+    //Controllers SQLite PRODUCTS
+
+    public void insertProduct(product product){try {
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_NAME, product.getName());
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_DESCRIPTION, product.getDescription());
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_UNIT, product.getUnit());
@@ -68,8 +69,6 @@ public class controllers_sqlite {
     }
 
     public void updateProduct(String id){
-        db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
         try {
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_ID, id);
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_SYNC, 1);
@@ -83,4 +82,55 @@ public class controllers_sqlite {
             }
         }
     }
+
+    //Controllers SQLite ORDERS
+
+    public void insertOrder(order order, String clientId, String employeeId, String productId){
+
+        try{
+
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_DESCRIPTION, order.getDescription());
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_REQUEST_ON, order.getRequestOn());
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_ORDER_TYPE, order.getOrderTypetId());
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_CLIENT_ID, clientId);
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_PRODUCT_ID, productId);
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_EMPLOYEE_ID, employeeId);
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_URGENT, order.getIsUrgent());
+
+            db.insert(feedSqlite.feedOrder.TABLE_NAME, null, values);
+
+            Log.d(getClass().getName(), "insertOrder: " + values.get(feedSqlite.feedOrder.COLUMN_ORDER_DESCRIPTION));
+
+        }catch (SQLiteException e){
+            Log.e(getClass().getSimpleName(), "Error: "+ e);
+        }finally {
+            if (db != null){
+                db.close();
+            }
+        }
+
+    }
+
+    public void updateOrder(String clientId, String employeeId, String productId, String orderId){
+
+        try {
+
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_CLIENT_ID, clientId);
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_EMPLOYEE_ID, employeeId);
+            values.put(feedSqlite.feedOrder.COLUMN_ORDER_PRODUCT_ID, productId);
+
+            db.update(feedSqlite.feedOrder.TABLE_NAME, values, feedSqlite.feedOrder._ID + "=" + orderId, null );
+
+            Log.d(getClass().getSimpleName(), "updateOrder");
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }finally {
+            if (db != null){
+                db.close();
+            }
+        }
+    }
+
+
 }
