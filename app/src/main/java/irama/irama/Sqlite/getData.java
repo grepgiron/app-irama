@@ -35,7 +35,6 @@ public class getData {
     private parameters parameter;
 
 
-
     public getData(Context context) {
         this.context = context;
         dbHelper = new DBHelper(context);
@@ -99,32 +98,34 @@ public class getData {
         return arrayOfParameters;
     }
 
-    public ArrayList<clients> getClientSQLite(){
+    public ArrayList<order> getOrdersPending(){
 
-        try{
+        /*try{
             sqLiteDatabase = dbHelper.getWritableDatabase();
-            Cursor c = sqLiteDatabase.rawQuery(feedSqlite.feedClient.QUERY_CLIENTS, null);
+            Cursor c = sqLiteDatabase.rawQuery(feedSqlite.feedOrder.QUERY_PENDING_ORDER, null);
             if(c != null){
-                if(c.moveToFirst()){
+                Log.e("Cursor", "get values " + c.getCount());
+                if(c.moveToFirst()) {
                     do {
-                        if (c.getInt(6) != 1){
-                            arrayOfClients.add(new clients(c.getString(0), c.getString(1), c.getString(2),
-                                    c.getString(3), c.getString(4), c.getString(5), c.getInt(6)));
+                        if(c.getInt(2) == 0) {
+                            parameters = new parameters(c.getString(0).toString(),
+                                    c.getString(1).toString(),"","", c.getInt(2));
+                            arrayOfOrders.add(parameters);
                         }
                     }while (c.moveToNext());
                 }
             }
-
-            Log.d(getClass().getSimpleName(), "getClients().Sql");
+            Log.e(getClass().getName(), "getOrder");
 
         }catch (SQLiteException e){
-            Log.e(getClass().getSimpleName(), "Error: " + e);
+            Log.e(getClass().getSimpleName(), "error getOrder: " + e);
         }finally {
-            if(sqLiteDatabase!=null){
-                sqLiteDatabase.close();
+            if(db != null){
+                db.close();
             }
-        }
-        return arrayOfClients;
+        }*/
+
+        return arrayOfOders;
     }
 
 }

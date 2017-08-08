@@ -48,7 +48,11 @@ public class home_assistance extends Fragment {
 
     private CircleButton newClient, newOrder, syncOrders, syncClients, getClients;
     private SQLiteDatabase db;
+
+    private ArrayList<clients> arrayOfClients;
+
     private DBHelper dbHelper;
+    private SQLiteDatabase sqLiteDatabase;
 
     private postData postData;
     private getData getData;
@@ -92,8 +96,11 @@ public class home_assistance extends Fragment {
         syncClients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postData.postClients(getData.getClientSQLite());
-                Log.d(getClass().getName(), "sync clients");
+                if(arrayOfClients != null) {
+                    postData.postClients(arrayOfClients);
+                    Log.d(getClass().getName(), "sync clients");
+                }
+
             }
         });
 
@@ -127,7 +134,7 @@ public class home_assistance extends Fragment {
             getClients = (CircleButton) view.findViewById(R.id.assistance_get_clients);
 
             postData = new postData(view.getContext());
-            //arrayOfClients = new ArrayList<clients>();
+            arrayOfClients = new ArrayList<clients>();
 
             controller = new controller_assistance(view.getContext());
 
@@ -249,4 +256,35 @@ public class home_assistance extends Fragment {
         }
         return arrayOfClients;
     }*/
+
+    public ArrayList<clients> getClientSQLite(){
+
+        try{
+            sqLiteDatabase = dbHelper.getWritableDatabase();
+            Cursor c = sqLiteDatabase.rawQuery(feedSqlite.feedClient.QUERY_CLIENTS, null);
+            if(c != null){
+                if(c.moveToFirst()){
+                    do {
+                        if (c.getInt(6) != 1){
+                            arrayOfClients.add(new clients(c.getString(0), c.getString(1), c.getString(2),
+                                    c.getString(3), c.getString(4), c.getString(5), c.getInt(6)));
+                        }
+                    }while (c.moveToNext());
+                }
+            }else{
+                arrayOfClients.add(new clients());
+                return (arrayOfClients);
+            }
+
+            Log.d(getClass().getSimpleName(), "getClients().Sql");
+
+        }catch (SQLiteException e){
+            Log.e(getClass().getSimpleName(), "Error: " + e);
+        }finally {
+            if(sqLiteDatabase!=null){
+                sqLiteDatabase.close();
+            }
+        }
+        return arrayOfClients;
+    }
 }
