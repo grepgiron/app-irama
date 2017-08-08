@@ -95,6 +95,7 @@ public class detail_order extends AppCompatActivity {
         }
     }
 
+
     public void newOrder(){
         if(validateData()) {
             producId = controllersSqlite.insertProduct(product);
