@@ -18,6 +18,9 @@ public class order {
     private String orderTypetId;
     public int isSync;
 
+    public order() {
+    }
+
     public order(String s, String toString, String s1, int anInt) {
     }
 

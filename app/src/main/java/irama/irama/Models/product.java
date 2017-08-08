@@ -11,6 +11,8 @@ public class product {
     private String description;
     private String unit;
 
+    public product() {
+    }
 
     public product(String _id, String name, String description, String unit) {
         this._id = _id;

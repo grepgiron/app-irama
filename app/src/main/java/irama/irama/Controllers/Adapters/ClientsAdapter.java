@@ -85,6 +85,7 @@ public class ClientsAdapter extends RecyclerView.Adapter<ClientsAdapter.ViewHold
         public void onClick(View v) {
             Log.e(getClass().getName().toString(), clientses.get(this.getPosition()).getName());
             Intent intent = new Intent(context, detail_order.class);
+            intent.putExtra("clientId", clientses.get(this.getPosition()).getId());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }

@@ -36,6 +36,13 @@ public class controllers_sqlite {
 
     //Controllers SQLite CLIENTS
 
+    public long insertClient(){
+        long id = -1;
+
+        return id;
+    }
+
+
     public void updatedClient(String _id, String rtn, String code){
         try {
             values.put(feedSqlite.feedClient.COLUMN_CLIENT_ID, _id);
@@ -54,11 +61,14 @@ public class controllers_sqlite {
 
     //Controllers SQLite PRODUCTS
 
-    public void insertProduct(product product){try {
+    public long insertProduct(product product){
+        long id = -1;
+        try {
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_NAME, product.getName());
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_DESCRIPTION, product.getDescription());
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_UNIT, product.getUnit());
-            db.insert(feedSqlite.feedProduct.TABLE_NAME, null, values);
+            id = db.insert(feedSqlite.feedProduct.TABLE_NAME, null, values);
+            return id;
         } catch (SQLiteException e) {
             e.printStackTrace();
         }finally {
@@ -66,10 +76,10 @@ public class controllers_sqlite {
                 db.close();
             }
         }
+        return id;
     }
 
-    public void updateProduct(String id){
-        try {
+    public void updateProduct(String id){try {
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_ID, id);
             values.put(feedSqlite.feedProduct.COLUMN_PRODUCT_SYNC, 1);
             Cursor c = db.rawQuery(feedSqlite.feedProduct.LAST_RECORD,  null);
@@ -85,7 +95,8 @@ public class controllers_sqlite {
 
     //Controllers SQLite ORDERS
 
-    public void insertOrder(order order, String clientId, String employeeId, String productId){
+    public long insertOrder(order order, String clientId, String employeeId, String productId){
+        long id = -1;
 
         try{
 
@@ -97,10 +108,10 @@ public class controllers_sqlite {
             values.put(feedSqlite.feedOrder.COLUMN_ORDER_EMPLOYEE_ID, employeeId);
             values.put(feedSqlite.feedOrder.COLUMN_ORDER_URGENT, order.getIsUrgent());
 
-            db.insert(feedSqlite.feedOrder.TABLE_NAME, null, values);
+            id = db.insert(feedSqlite.feedOrder.TABLE_NAME, null, values);
 
             Log.d(getClass().getName(), "insertOrder: " + values.get(feedSqlite.feedOrder.COLUMN_ORDER_DESCRIPTION));
-
+            return id;
         }catch (SQLiteException e){
             Log.e(getClass().getSimpleName(), "Error: "+ e);
         }finally {
@@ -108,7 +119,7 @@ public class controllers_sqlite {
                 db.close();
             }
         }
-
+        return id;
     }
 
     public void updateOrder(String clientId, String employeeId, String productId, String orderId){

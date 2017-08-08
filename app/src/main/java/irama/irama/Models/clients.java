@@ -6,6 +6,7 @@ package irama.irama.Models;
 
 public class clients {
 
+    private long id;
     private String _id;
     private String cliendId;
     private String code;
@@ -125,5 +126,13 @@ public class clients {
 
     public void setCliendId(String cliendId) {
         this.cliendId = cliendId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
